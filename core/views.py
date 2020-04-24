@@ -7,3 +7,6 @@ def home(request):
 
 def grafos(request):
     return render(request,"core/grafos.html")
+
+def nosotros(request):
+    return render(request,"core/nosotros.html")

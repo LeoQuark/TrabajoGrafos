@@ -1,6 +1,8 @@
 const padre = document.querySelector("#nArista");
+const numVertices = document.querySelector("#vertices");
 const arista = document.querySelector("#arista");
 const inputArista = document.querySelector("#inputArista").addEventListener("click",totalArista);
+const tipoGrafo = document.querySelector("#tipoGrafo");
 
 function totalArista(e){
     e.preventDefault();
@@ -41,7 +43,15 @@ function validar(e){
         const valor = document.querySelector(`#vertice_e${i}`);
         listaAristas.push(valor.value.toString().split(","));
     }
-    console.log(listaAristas);
+    var Constuir = {
+        grafo : tipoGrafo.value,
+        vertices : numVertices.value,
+        aristas : arista.value,
+        allAristas : listaAristas
+    }
+    var json = JSON.stringify(Constuir);
+    
 }
+
 
 
