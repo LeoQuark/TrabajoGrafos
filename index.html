@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" >
+
+    
+    <script src="https://kit.fontawesome.com/b097035380.js" crossorigin="anonymous"></script>
+    <title>Grafos</title>
+  </head>
+  <body background="img/spring.png">
+ 
+      <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <div class="row">
+                <a href="index.html"><img src="img/logo.svg" width="35" height="35"></a>
+                <a href="index.html" class="navbar-brand mx-3" id="navtitle">Trabajo Grafos</a>
+            </div>
+            <button class="navbar-toggler border border-light shadow-sm" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Menu">
+                <span class="material-icons text-white"><i class="fas fa-bars text-white"></i></span>
+              </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbar">
+                <div class="row">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link mx-2" id="menu">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="grafos.html" class="nav-link mx-2" id="menu">Grafos</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a href="nosotros.html" class="nav-link mx-2" id="menu">Nosotros</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav><br><br><br>
+
+    <!-- CUERPO -->
+    <div class="container bg-white rounded shadow mb-5">
+        <div class="row my-3">
+            <div class="col-12 d-flex justify-content-center mt-4">
+                <h4 id="title">Trabajo Unidad I</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 my-4">
+                <p>De acuerdo a los conocimientos adquiridos durante la 1<sup>era</sup> Unidad de la asignatura de
+                <i class="fas fa-project-diagram fa-sm mx-1"></i><strong>Grafos y Lenguajes Formales</strong>. Se ha desarrollado una implementación web para la creación y análisis de Grafos, de acuerdo a unos parámetros de entrada (Vértices y Aristas).
+                </p>
+                <br>
+                <p>Podrás obtener información variada de Grafos, visualizarlos y más. Todo al alcance de unos cuantos <kbd class="bg-primary">Click!</kbd></p>
+            </div>
+            <div class="col-lg-6 col-sm-12 d-flex align-items-center">
+                <ul class="pl-3">
+                    <li class="my-3" id="ticket">
+                        <i class="fas fa-check fa-lg mx-1" id="idTicket"></i>
+                        Ingresa distintos tipos de Grafos.
+                    </li>
+                    <li class="my-3" id="ticket">
+                        <i class="fas fa-check fa-lg mx-1" id="idTicket"></i>
+                        Visualiza la matriz de caminos y si el grafo es o no conexo.
+                    </li>
+                    <li class="my-3" id="ticket">
+                        <i class="fas fa-check fa-lg mx-1" id="idTicket"></i>
+                        Analiza si tu grafo es Hamiltoniano y/o Euleriano.
+                    </li>
+                    <li class="my-3" id="ticket">
+                        <i class="fas fa-check fa-lg mx-1" id="idTicket"></i>
+                        Observa el flujo máximo para un vértice de entrada y otro de salida.
+                    </li>
+                    <li class="my-3" id="ticket">
+                        <i class="fas fa-check fa-lg mx-1" id="idTicket"></i>
+                        Obtenga el árbol generador mínimo mediante Prim o Kruskal.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center my-3 pb-3">
+                <a href="{% url 'grafos' %}" id="btnComenzar" style="text-decoration:none">Ingresa un Grafo</a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!--FOOTER-->
+    <footer class="fixed-bottom pt-1">
+        <div class="row my-2">
+            <div class="col d-flex justify-content-center">
+                <a href="https://github.com/LeoQuark/TrabajoGrafos" class="text-white">
+                    <i class="fab fa-github fa-lg mx-2"></i>
+                </a>
+                <a href="https://www.utem.cl/" class="text-white">
+                    <i class="fas fa-graduation-cap fa-lg mx-2"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center text-white">
+                Copyright 2020<i class="far fa-copyright fa-sm mx-1 pt-1"></i>Ingeneria Civíl en Computación
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/grafos.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+    
+                
