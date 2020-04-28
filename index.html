@@ -10,55 +10,6 @@
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" >
 
     <script src="https://kit.fontawesome.com/b097035380.js" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        var nodes = null;
-        var edges = null;
-        var network = null;
-        var setSmooth = false;
-    
-        function destroy() {
-          if (network !== null) {
-            network.destroy();
-            network = null;
-          }
-        }
-    
-        function draw() {
-          destroy();
-          var nodeCount = document.getElementById('nodeCount').value;
-          if (nodeCount > 100) {
-            document.getElementById("message").innerHTML = '<a onclick="disableSmoothCurves()">You may want to disable dynamic smooth curves for better performance with a large amount of nodes and edges. Click here to disable them.</a>';
-          }
-          else if (setSmooth === false) {
-            document.getElementById("message").innerHTML = '';
-          }
-          // create a network
-          var container = document.getElementById('mynetwork');
-          var data = getScaleFreeNetwork(nodeCount);
-          var options = {
-            physics: { stabilization: false }
-          };
-          network = new vis.Network(container, data, options);
-        }
-    
-        function disableSmoothCurves() {
-          setSmooth = true;
-          network.setOptions({edges:{smooth:{type:'continuous'}}});
-          document.getElementById("message").innerHTML = '<a onclick="enableSmoothCurves()">Click here to reenable the dynamic smooth curves.</a>';
-        }
-    
-        function enableSmoothCurves() {
-          setSmooth = false;
-          document.getElementById("message").innerHTML = '<a onclick="disableSmoothCurves()">You may want to disable dynamic smooth curves for better performance with a large amount of nodes and edges. Click here to disable them.</a>';
-          network.setOptions({edges:{smooth:{type:'dynamic'}}});
-        }
-    
-    
-      </script>
-
-
-
     <title>Grafos</title>
   </head>
   <body background="img/spring.png">
@@ -90,22 +41,7 @@
             </div>
         </div>
     </nav><br><br><br>
-
-    <form onsubmit="draw(); return false;">
-        <label for="nodeCount">Number of nodes:</label>
-        <input id="nodeCount" type="text" value="25" style="width: 50px;">
-        <input type="button" value="Go" onclick="draw()">
-      </form>
-      </p>
-      <span id="message"></span>
-      <div id="mynetwork"></div>
-      
-
-
-
-
-
-
+    
     <!-- CUERPO -->
     <div class="container bg-white rounded shadow mb-5">
         <div class="row my-3">
@@ -148,7 +84,7 @@
         </div>
         <div class="row">
             <div class="col d-flex justify-content-center my-3 pb-3">
-                <a href="{% url 'grafos' %}" id="btnComenzar" style="text-decoration:none">Ingresa un Grafo</a>
+                <a href="grafos.html" id="btnComenzar" style="text-decoration:none">Ingresa un Grafo</a>
             </div>
         </div>
     </div>

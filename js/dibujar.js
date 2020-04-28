@@ -6,19 +6,6 @@ var nodes = null;
     var seed = 2;
     var defaultLocal = navigator.language;
     var select = document.getElementById('locale');
-    //select.selectedIndex = 0; // set fallback value
-
-    // function setDefaultLocale() {
-    //     var defaultLocal = navigator.language;
-    //     var select = document.getElementById('locale');
-    //     select.selectedIndex = 0; // set fallback value
-    //     for (var i = 0, j = select.options.length; i < j; ++i) {
-    //         if (select.options[i].getAttribute('value') === defaultLocal) {
-    //             select.selectedIndex = i;
-    //             break;
-    //      }
-    //    }
-    //  }
 
     function destroy() {
       if (network !== null) {
@@ -33,19 +20,19 @@ var nodes = null;
       edges = [];
 
       // create a network
-      var container = document.getElementById('mynetwork');
+      var container = document.getElementById('resultado');
       var options = {
         layout: {randomSeed:seed}, // just to make sure the layout is the same when the locale is changed
         locale: document.getElementById('locale').value,
         manipulation: {
           addNode: function (data, callback) {
             // filling in the popup DOM elements
-            document.getElementById('node-operation').innerHTML = "Agregar Vertice";
+            document.getElementById('node-operation').innerHTML = "Agregar Vértice";
             editNode(data, clearNodePopUp, callback);
           },
           editNode: function (data, callback) {
             // filling in the popup DOM elements
-            document.getElementById('node-operation').innerHTML = "Edit Node";
+            document.getElementById('node-operation').innerHTML = "Editar Vértice";
             editNode(data, cancelNodeEdit, callback);
           },
           addEdge: function (data, callback) {
@@ -56,12 +43,12 @@ var nodes = null;
                 return;
               }
             }
-            document.getElementById('edge-operation').innerHTML = "Add Edge";
+            document.getElementById('edge-operation').innerHTML = "Agregar Arista";
             editEdgeWithoutDrag(data, callback);
           },
           editEdge: {
             editWithoutDrag: function(data, callback) {
-              document.getElementById('edge-operation').innerHTML = "Edit Edge";
+              document.getElementById('edge-operation').innerHTML = "Editar Arista";
               editEdgeWithoutDrag(data,callback);
             }
           }
@@ -119,7 +106,7 @@ var nodes = null;
         data.to = data.to.id
       if (typeof data.from === 'object')
         data.from = data.from.id
-      data.label = document.getElementById('edge-label').value;
+      data.label = document.getElementById('edge-label').setAttribute("placeholder","uwu");
       clearEdgePopUp();
       callback(data);
     }
