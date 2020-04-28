@@ -15,6 +15,8 @@ $( document ).ready(function(){
         $('#listadoAristas').append(bloque_padre); 
     });
 
+    
+
     const listaAristas=[];
     const listaPesos=[];
 
@@ -35,6 +37,9 @@ $( document ).ready(function(){
             peso: listaPesos
         }
     }
+    
+
+    
     
 
 });

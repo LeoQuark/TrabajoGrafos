@@ -65,3 +65,7 @@ footer{
     color: red;
 }
 
+#resultado{
+    border: 1px solid lightgray;
+}
+

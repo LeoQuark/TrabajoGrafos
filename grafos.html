@@ -7,13 +7,21 @@
 
     <!-- Bootstrap CSS -->
     <link type="text/css" rel="stylesheet" href="css/styles.css">
+    <link type="text/css" rel="stylesheet" href="css/grafos.css">
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" >
+    <script type="text/javascript" src="js/dibujar.js"></script>
 
-    
     <script src="https://kit.fontawesome.com/b097035380.js" crossorigin="anonymous"></script>
+    <script src="https://github.com/nuagenetworks/vis-graphs.git your-path"></script>
+    <!-- vis -->
+    <script type="text/javascript" src="exampleUtil.js"></script>
+    <script type="text/javascript" src="dist/vis.js"></script>
+    <link href="dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+    
+
     <title>Grafos</title>
   </head>
-  <body background="img/spring.png">
+  <body background="img/spring.png" onload="init();">
  
       <!-- HEADER -->
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -46,7 +54,104 @@
     <!-- CUERPO -->
     <div class="container">
         <div class="row">
-            <!-- formulario para ingresar un grafo (v,a) -->
+            <div class="col-lg-4 col-md-12 bg-white rounded shadow">
+                <div class="row my-2 d-flex justify-content-around">
+                    <h4>Instrucciones</h4>
+                </div>
+                <div class="row mx-2 my-2">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur laudantium possimus, nulla explicabo porro nisi quis et expedita a corrupti veritatis tempore sequi enim unde, placeat architecto hic mollitia beatae veniam qui ipsam. Minus accusantium soluta magni ad! Quo, esse?
+                    <p>
+                        <label for="locale">Select a locale:</label>
+                        <select id="locale" >
+                            <option value="en">en</option>
+                            <option value="de">de</option>
+                            <option value="es">es</option>
+                            <option value="it">it</option>
+                            <option value="nl">nl</option>
+                            <option value="pt-br">pt</option>
+                            <option value="ru">ru</option>
+                        </select>
+                      </p>
+                </div>
+                <div class="row d-flex justify-content-center my-2">
+                    <button class="btn btn-primary" onclick="draw()">Comenzar</button>
+                </div>
+            </div>
+            <div class="col-lg-7 col-sm-12 bg-white rounded shadow mx-2">
+                <div id="node-popUp">
+                    <span id="node-operation">Vértices</span> <br>
+                    <table style="margin:auto;">
+                      <tr>
+                        <td>id</td><td><input id="node-id" value="new value" /></td>
+                      </tr>
+                      <tr>
+                        <td>Nombre</td><td><input id="node-label" value="new value" /></td>
+                      </tr>
+                    </table>
+                    <input type="button" value="save" id="node-saveButton" />
+                    <input type="button" value="cancel" id="node-cancelButton" />
+                  </div>
+                  
+                  <div id="edge-popUp">
+                    <span id="edge-operation">Aristas</span> <br>
+                    <table style="margin:auto;">
+                      <tr>
+                        <td>label</td><td><input id="edge-label" value="new value" /></td>
+                      </tr></table>
+                    <input type="button" value="save" id="edge-saveButton" />
+                    <input type="button" value="cancel" id="edge-cancelButton" />
+                  </div>
+                  
+                  <br />
+                  <div id="mynetwork"></div>
+            </div>
+        </div>
+    </div>
+
+            
+            <!--
+            <p>
+                <label for="locale">Select a locale:</label>
+                <select id="locale" onchange="draw();">
+                  <option value="en">en</option>
+                  <option value="de">de</option>
+                  <option value="es">es</option>
+                  <option value="it">it</option>
+                  <option value="nl">nl</option>
+                  <option value="pt-br">pt</option>
+                  <option value="ru">ru</option>
+                </select>
+              </p>
+            <div id="node-popUp">
+                <span id="node-operation">node</span> <br>
+                <table style="margin:auto;">
+                  <tr>
+                    <td>id</td><td><input id="node-id" value="new value" /></td>
+                  </tr>
+                  <tr>
+                    <td>label</td><td><input id="node-label" value="new value" /></td>
+                  </tr>
+                </table>
+                <input type="button" value="save" id="node-saveButton" />
+                <input type="button" value="cancel" id="node-cancelButton" />
+              </div>
+              
+              <div id="edge-popUp">
+                <span id="edge-operation">edge</span> <br>
+                <table style="margin:auto;">
+                  <tr>
+                    <td>label</td><td><input id="edge-label" value="new value" /></td>
+                  </tr></table>
+                <input type="button" value="save" id="edge-saveButton" />
+                <input type="button" value="cancel" id="edge-cancelButton" />
+              </div>
+              
+              <br />
+              <div id="mynetwork"></div>
+
+
+
+            formulario para ingresar un grafo (v,a) 
             <div class="col-lg-4 col-md-12 bg-white rounded shadow">
                 <div class="row my-2 d-flex justify-content-around">
                     <div class="">Tipo de Grafo</div>
@@ -72,9 +177,11 @@
                         <button  class="btn btn-primary" id="inputGrafo">Agregar Grafo</button>
                     </div>
                 </div>
-            <div class="col" id="resultado"></div>
-        </div>
-    </div>
+            -->
+            <!-- <div class="col-lg-4 col-md-12 bg-white rounded shadow mx-2" id="resultado">
+            
+            </div> -->
+        
 
 
     
