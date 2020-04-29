@@ -59,7 +59,7 @@
             <h4 id="title" >Instrucciones</h4>
           </div>
           <div class="row mx-2 my-2 pt-3">
-            <p>En esta sección podrás crear tu grafo, visualizarlo e interactuar con él. Sólo sigue los siguientes pasos:<br><br><strong>1.</strong> Presiona el botón inferior 'Comenzar'.<br><strong>2.</strong> Pulsa Editar.<br><strong>3.</strong> Añade un vértice o arista.<br><strong>4.</strong> Sigue las instrucciones de la parte superior (puedes agregar un peso a la arista, en caso de que sea un Grafo Etiquetado, de lo contrario, deja el cuadro vacío).<br><strong>5.</strong>Listo, vé a interactuar con tu Grafo</p>
+            <p>En esta sección podrás crear tu grafo, visualizarlo e interactuar con él. Sólo sigue los siguientes pasos:<br><br><strong>1.</strong> Presiona el botón inferior 'Comenzar'.<br><strong>2.</strong> Pulsa Editar.<br><strong>3.</strong> Añade un vértice o arista.<br><strong>4.</strong> Sigue las instrucciones de la parte superior (puedes agregar un peso a la arista, en caso de que sea un Grafo Etiquetado, de lo contrario, deja el cuadro vacío).<br><strong>5.</strong> Listo, vé a interactuar con tu Grafo</p>
             <select id="locale" style="display: none;"><option value="es">es</option></select>
           </div>
           <div class="row d-flex justify-content-center my-2">
@@ -74,7 +74,7 @@
             <tr>
               <td>id</td><td><input id="node-id" class="form-control" placeholder="id"/></td>
             </tr>
-            <tr>
+            <tr style="display: none;" >
               <td>Nombre</td><td><input id="node-label" class="form-control" placeholder="Nombre" /></td>
             </tr>
           </table>
@@ -125,7 +125,7 @@
               <div class="collapse" id="MatrizCaminos">
                 <div class="">
                   <div class="row d-flex justify-content-center">
-                    <h4>Matriz de Caminos</h4>
+                    <h4 onclick="show()">Matriz de Caminos</h4>
                   </div>
                   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
                 </div>
