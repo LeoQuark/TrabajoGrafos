@@ -17,9 +17,10 @@
     <script type="text/javascript" src="exampleUtil.js"></script>
     <script type="text/javascript" src="dist/vis.js"></script>
     <link href="dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="img/logo.svg">
     
 
-    <title>Grafos</title>
+    <title>Grafos | Análisis</title>
   </head>
   <body background="img/spring.png" onload="init();">
  
@@ -103,26 +104,30 @@
             <h4 id="title">Análisis del Grafo</h4>
           </div>
           <hr>
+
           <div class="row my-2">
-            <ul class="col-lg-3 col-sm-12 my-2">
-              <li class="analisis" role="button" data-toggle="collapse" data-target="#MatrizCaminos" aria-expanded="false" aria-controls="MAtrizCaminos">
+
+            <ul class="col-lg-3 col-sm-12 my-2 list-group list-group-flush">
+              <li class="list-group-item analisis" id="item1" data-toggle="collapse" data-target="#MatrizCaminos" aria-expanded="false" aria-controls="MAtrizCaminos">
                 Matriz de Caminos
+                <!-- <span><i class="fas fa-chevron-left fa-sm"></i></span> -->
               </li>
-              <li class="analisis" role="button" data-toggle="collapse" data-target="#CaminoCorto" aria-expanded="false" aria-controls="CaminoCorto">
+              <li class="list-group-item analisis" id="item2" data-toggle="collapse" data-target="#CaminoCorto" aria-expanded="false" aria-controls="CaminoCorto">
                 Camino más corto
               </li>
-              <li class="analisis" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <li class="list-group-item analisis" id="item3" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Hamiltoniano y/o Euleriano
               </li>
-              <li class="analisis" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <li class="list-group-item analisis" id="item4" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Flujo Máximo
               </li>
-              <li class="analisis" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <li class="list-group-item analisis" id="item5" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Árbol Generador Mínimo
               </li>
             </ul>
+
             <div class="col-lg-7 col-sm-12 my-2">
-              <div class="collapse" id="MatrizCaminos">
+              <div class="collapsing" id="MatrizCaminos" aria-labelledby="item1">
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4 onclick="show()">Matriz de Caminos</h4>
@@ -131,7 +136,34 @@
                 </div>
               </div>
 
-              <div class="collapse" id="CaminoCorto">
+              <div class="collapsing" id="CaminoCorto" aria-labelledby="item2">
+                <div class="">
+                  <div class="row d-flex justify-content-center">
+                    <h4>Camino más corto</h4>
+                  </div>
+                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
+                </div>
+              </div>
+
+              <div class="collapsing" id="CaminoCorto" aria-labelledby="item2">
+                <div class="">
+                  <div class="row d-flex justify-content-center">
+                    <h4>Camino más corto</h4>
+                  </div>
+                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
+                </div>
+              </div>
+
+              <div class="collapsing" id="CaminoCorto" aria-labelledby="item2">
+                <div class="">
+                  <div class="row d-flex justify-content-center">
+                    <h4>Camino más corto</h4>
+                  </div>
+                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
+                </div>
+              </div>
+
+              <div class="collapsing" id="CaminoCorto" aria-labelledby="item2">
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Camino más corto</h4>
@@ -145,11 +177,6 @@
           <div class="row my-5"></div>
         </div>
       </div>
-
-
-    </div>
-    <a data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Button with data-target</a>
-  </div>
 
     <br>
     <br>

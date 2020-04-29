@@ -45,11 +45,14 @@ footer{
     border-color: var(--marineBlue);
     border-radius: 0.5rem;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 #btnComenzar:hover{
     background-color: var(--marineBlue);
     color: white;
+    transform: scale(1.05);
+    box-shadow: 3px 3px 3px rgba(68,68,68,0.6);
 }
 
 #ticket{
@@ -70,11 +73,27 @@ footer{
 }
 .analisis{
     list-style: none;
-    margin: 15px 15px;
     border-radius: 0.2rem;
+    transition: 0.1s;
+    cursor: pointer;
 }
 .analisis:hover{
     background-color: var(--marineBlue);
+    transform: scale(1.2);
     color: white;
+    font-size:large;
+
 }
+/* span{
+    padding-left: 35%;
+    transition: 0.5s;
+    position: absolute;
+}
+
+.analisis:hover span{
+    
+    transform: rotateY(180deg);
+} */
+
+
 
