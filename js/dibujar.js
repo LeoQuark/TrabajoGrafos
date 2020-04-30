@@ -126,12 +126,40 @@ function draw() {
       setDefaultLocale();
       draw();
     }
+
+    //a. matriz de caminos y grafo conexa o no
+    function buscar(columna,fila){
+      for(let i=0; i<(aristas_from.length);i++){
+        if(columna===aristas_from[i] && fila===aristas_to[i] || columna===aristas_to[i] && fila===aristas_from[i]){
+          return 1;
+        }
+       }
+    }
+    function MatrizAdyacencia(mAdyacencia){
+      var mAdyacencia = []; //filas
+      var aux = [] // columnas
+      for(let i=0; i<vertices.length;i++){
+        for(let j=0; j<vertices.length;j++){
+          if(buscar(vertices[i],vertices[j])===1){
+            aux.push(1);
+          }
+          else{
+            aux.push(0);
+          }   
+        }
+        mAdyacencia[i]=aux;
+        aux=[];
+      }
+      console.log(mAdyacencia)
+    }
     function show(){
       console.log(vertices);
       console.log(aristas_from);
       console.log(aristas_to);
-    }
+      MatrizAdyacencia();
 
+    }
+    
 
     
 
