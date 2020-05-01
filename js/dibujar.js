@@ -5,6 +5,7 @@ var network = null;
 var vertices = [];
 var aristas_from  = [];
 var aristas_to = [];
+var peso = []
 // randomly create some nodes and edges
 var data = getScaleFreeNetwork(25);
 var seed = 2;
@@ -118,6 +119,7 @@ function draw() {
       data.label = document.getElementById('edge-label').value;
       aristas_from.push(data.from);
       aristas_to.push(data.to);
+      peso.push(data.label);
       clearEdgePopUp();
       callback(data);
     }
@@ -154,7 +156,7 @@ function draw() {
       MatrizCaminos(mAdyacencia);
     }
     function multiplicarMatriz(matriz1, matriz2,matrizF){
-      var aux1=0, suma=0, maux = [] //
+      var suma=0, maux = [] //
       for(let i=0; i<vertices.length;i++){ //avanza por las filas de la matriz1
         for(let j=0; j<vertices.length;j++){ //avanza por las columnas de las matriz2
           for(let k=0; k<vertices.length;k++){ 
@@ -177,7 +179,7 @@ function draw() {
         maux=[]        
       }
     }
-    function Concexo(matriz){
+    function Conexo(matriz){
       var  cont=0;
       for(let i=0; i<vertices.length;i++){
         for(let j=0; j<vertices.length;j++){
@@ -194,7 +196,7 @@ function draw() {
       }
     }
     function MatrizCaminos(mAdyacencia){
-      var mCaminos=[], mMultiplicada=[], mSuma=[]=mAdyacencia, aux = mAdyacencia, m2aux=[]
+      var mCaminos=[], mMultiplicada=[], mSuma=[]=mAdyacencia, aux = mAdyacencia
  
       for(let i=0; i<((vertices.length)-1);i++){
         multiplicarMatriz(mAdyacencia,aux,mMultiplicada);
@@ -202,13 +204,18 @@ function draw() {
       sumarMatrices(mMultiplicada,mSuma,mCaminos)
       aux=mMultiplicada
       console.log(mCaminos)
-      Concexo(mCaminos)
+      Conexo(mCaminos)
     }
-    //
+    //Camino mas corto para dos nodos, mostrando la duracion y la ruta de dicho camino
+    function CaminoCorto(){
+      console.log("mmm")
+
+    }
     function show(){
       console.log(vertices);
       console.log(aristas_from);
       console.log(aristas_to);
+      console.log(peso)
       MatrizAdyacencia();
 
     }
