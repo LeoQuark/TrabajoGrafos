@@ -154,7 +154,9 @@ function draw() {
       }
       console.log(mAdyacencia);
       MatrizCaminos(mAdyacencia);
+      return mAdyacencia;
     }
+
     function multiplicarMatriz(matriz1, matriz2,matrizF){
       var suma=0, maux = [] //
       for(let i=0; i<vertices.length;i++){ //avanza por las filas de la matriz1
@@ -169,6 +171,7 @@ function draw() {
       maux=[]
       }
     }
+
     function sumarMatrices(matriz1, matriz2, matrizF){
       var maux=[]
       for(let i=0; i<vertices.length;i++){
@@ -179,6 +182,7 @@ function draw() {
         maux=[]        
       }
     }
+
     function Conexo(matriz){
       var  cont=0;
       for(let i=0; i<vertices.length;i++){
@@ -195,6 +199,7 @@ function draw() {
         console.log("El grafo no es conexo")
       }
     }
+
     function MatrizCaminos(mAdyacencia){
       var mCaminos=[], mMultiplicada=[], mSuma=[]=mAdyacencia, aux = mAdyacencia
  
@@ -211,14 +216,65 @@ function draw() {
       console.log("mmm")
 
     }
+
+    function dibujarMAtriz(matriz){
+      //creo los elementos y llamo a la tabla del html
+      var tabla_padre = document.querySelector("#matrizAdy");
+      var fila = document.createElement('tr');
+      var primero = document.createElement('td');
+      primero.textContent = "-";
+      primero.style.backgroundColor="#cfd8dc";
+      primero.style.textAlign="center";
+      primero.style.width="40px";
+      primero.style.height="40px";
+      fila.appendChild(primero);
+      //for para agregar los valores de la primera fila
+      for(let i=0 ; i<vertices.length; i++){
+        var p_fila = document.createElement('td');
+        p_fila.style.width="40px";
+        p_fila.style.height="40px";
+        p_fila.style.textAlign="center";
+        p_fila.style.backgroundColor="#cfd8dc";
+        p_fila.textContent = vertices[i];
+        fila.appendChild(p_fila);
+      }
+      tabla_padre.appendChild(fila);
+
+      for(let k=0; k<matriz.length ;k++){
+        //se agrega el nombre de los vertices (en la primera columna)
+        var o_filas = document.createElement('tr');
+        var nombre = document.createElement('td');
+        nombre.style.width="40px";
+        nombre.style.height="40px";
+        nombre.style.backgroundColor="#cfd8dc";
+        nombre.style.textAlign="center";
+        nombre.textContent = vertices[k];
+        o_filas.appendChild(nombre);
+
+        for(let j=0; j<matriz.length ;j++){
+          //se agregan los datos contenidos en la matriz
+          var datos = document.createElement('td');
+          datos.style.width="40px";
+          datos.style.height="40px";
+          datos.style.textAlign="center";
+          datos.textContent = matriz[k][j];
+          o_filas.appendChild(datos); 
+        }
+        tabla_padre.appendChild(o_filas);
+      }
+    }
+
     function show(){
       console.log(vertices);
       console.log(aristas_from);
       console.log(aristas_to);
       console.log(peso)
       MatrizAdyacencia();
+      var matriz = MatrizAdyacencia();
+      dibujarMAtriz(matriz);
 
     }
+    
     
 
     
