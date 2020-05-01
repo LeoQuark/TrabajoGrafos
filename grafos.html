@@ -87,7 +87,7 @@
           <br>
           <table style="margin:auto;">
             <tr>
-              <td>Peso</td><td><input id="edge-label" class="form-control" placeholder="peso"/></td>
+              <td>Peso</td><td><input type="number" id="edge-label" class="form-control" min="0"/></td>
             </tr>
           </table>
           <input type="button" class="btn btn-primary"  value="Guardar" id="edge-saveButton" />
@@ -108,7 +108,7 @@
           <div class="row my-2">
 
             <ul class="col-lg-3 col-sm-12 my-2 list-group list-group-flush">
-              <li class="list-group-item analisis" id="item1" data-toggle="collapse" data-target="#MatrizCaminos" aria-expanded="false" aria-controls="MAtrizCaminos">
+              <li onclick="item_MatrizCamino()" class="list-group-item analisis" id="item1" data-toggle="collapse" data-target="#MatrizCaminos" aria-expanded="false" aria-controls="MAtrizCaminos">
                 Matriz de Caminos
                 <!-- <span><i class="fas fa-chevron-left fa-sm"></i></span> -->
               </li>
@@ -116,13 +116,13 @@
                 Camino más corto
 
               </li>
-              <li class="list-group-item analisis" id="item3" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <li class="list-group-item analisis" id="item3" data-toggle="collapse" data-target="#Hamil_Euler" aria-expanded="false" aria-controls="Hamil_Euler">
                 Hamiltoniano y/o Euleriano
               </li>
-              <li class="list-group-item analisis" id="item4" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <li class="list-group-item analisis" id="item4" data-toggle="collapse" data-target="#FlujoMaximo" aria-expanded="false" aria-controls="FlujoMaximo">
                 Flujo Máximo
               </li>
-              <li class="list-group-item analisis" id="item5" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              <li class="list-group-item analisis" id="item5" data-toggle="collapse" data-target="#ArbolGenerador" aria-expanded="false" aria-controls="ArbolGenerador">
                 Árbol Generador Mínimo
               </li>
             </ul>
@@ -131,7 +131,7 @@
               <div class="collapsing" id="MatrizCaminos" aria-labelledby="item1">
                 <div class="">
                   <div class="row d-flex justify-content-center">
-                    <h4 onclick="show()">Matriz de Caminos</h4>
+                    <h4>Matriz de Caminos</h4>
                   </div><br>
                   <p>En primer lugar obtenemos la <strong>Matriz de Adyacencia</strong> para el grafo ingresado:</p>
                   <br>
@@ -141,14 +141,16 @@
                     </div>
                   </div>
                   <br>
-                  <p onclick="show2()">Obteniendo la matriz de adyacencia, debemos elevar la matriz hasta <strong>n-1</strong> (siendo n = n° de vértices).
+                  <ps>Obteniendo la matriz de adyacencia, debemos elevar la matriz hasta <strong>n-1</strong> (siendo n = n° de vértices).
                     Así logramos conseguir la <strong>Matriz de Caminos</strong> :
-                  <br>
+                  <br><br>
                   <div class="row">
                     <div class="col d-flex justify-content-center">
                       <div id="matrizCam"></div>
                     </div>
                   </div>
+                  <br>
+                  <p>Obtenida la matriz de camino, podemos inferir que el grafo ingresado: <strong id="esConexo"></strong> .</p>
                 </div>
               </div>
 
@@ -156,44 +158,69 @@
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Camino más corto</h4>
+                  </div><br>
+                  <p>Seleccione un vértice de <strong>entrada</strong> y otro de <strong>salida</strong>:</p>
+                  <div class="row form-group d-flex justify-content-around">
+                    <div class="col-5 pl-0 mx-2">
+                      <label for="">Entrada </label>
+                      <input type="text" id="inputEntrada" class="form-control mx-2" placeholder="from">
+                    </div>
+                    <div class="col-5 pl-0 mx-2">
+                      <label for="">Salida </label>
+                      <input type="text" id="inputSalida" class="form-control mx-2" placeholder="to">
+                    </div>
                   </div>
-                  <form class="form-inline">
-                    <div class="form-group mx-sm-3">
-                        <label for="inputNodo1">Nodo 1:</label>
-                        <input class="form-control" id="inputNodo1" placeholder="">
+                  <div class="row">
+                    <div class="col d-flex justify-content-center">
+                      <a onclick="item_CaminoCorto()" id="btnComenzar" style="text-decoration:none">Analizar</a>
                     </div>
-                    <div class="form-group mx-sm-3">
-                        <label for="inputNodo2">Nodo 2:</label>
-                        <input class="form-control" id="inputNodo2" placeholder="">
-                    </div>
-                    <a onclick="CaminoCorto()" id="btnComenzar" style="text-decoration:none">Confirmar</a>
-                 </form>
+                  </div>
+                  <div id="Camino_corto">
+                  </div>
                 </div>
               </div>
 
-              <div class="collapsing" id="CaminoCorto" aria-labelledby="item2">
+              <div class="collapsing" id="Hamil_Euler" aria-labelledby="item3">
                 <div class="">
                   <div class="row d-flex justify-content-center">
-                    <h4>Camino más corto</h4>
-                  </div>
+                    <h4>Hamiltoniano y/o Euleriano</h4>
+                  </div><br>
                   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
                 </div>
               </div>
 
-              <div class="collapsing" id="CaminoCorto" aria-labelledby="item2">
+              <div class="collapsing" id="FlujoMaximo" aria-labelledby="item4">
                 <div class="">
                   <div class="row d-flex justify-content-center">
-                    <h4>Camino más corto</h4>
+                    <h4>Flujo Máximo</h4>
                   </div>
-                  <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
+                  <p>Seleccione un vértice de <strong>entrada</strong> y otro de <strong>salida</strong>:</p>
+                  <div class="row form-group d-flex justify-content-around">
+                    <div class="col-5 pl-0 mx-2">
+                      <label for="">Entrada </label>
+                      <input type="text" id="fm_Entrada" class="form-control mx-2" placeholder="from">
+                    </div>
+                    <div class="col-5 pl-0 mx-2">
+                      <label for="">Salida </label>
+                      <input type="text" id="fm_Salida" class="form-control mx-2" placeholder="to">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col  d-flex justify-content-center">
+                      <a onclick="item_FlujoMaximo()" id="btnComenzar" style="text-decoration:none">Analizar</a>
+                    </div>
+                  </div>
+                  <div id="salida_FlujoMaximo">
+
+                  </div>
                 </div>
               </div>
 
-              <div class="collapsing" id="CaminoCorto" aria-labelledby="item2">
+              <div class="collapsing" id="ArbolGenerador" aria-labelledby="item5">
                 <div class="">
                   <div class="row d-flex justify-content-center">
-                    <h4>Camino más corto</h4>
-                  </div>
+                    <h4>Árbol Generador Mínimo</h4>
+                  </div><br>
                   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
                 </div>
               </div>

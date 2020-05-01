@@ -43,7 +43,10 @@ function draw() {
       },
       addEdge: function (data, callback) {
         if (data.from == data.to) {
-          var r = confirm("Do you want to connect the node to itself?");
+          var r = confirm(`
+            ¿ Deseas conectar el vértice a sí mismo ? 
+            pd: Crearás un bucle !
+          `);
           if (r != true) {
             callback(null);
             return;
@@ -94,7 +97,7 @@ function draw() {
 
     function editEdgeWithoutDrag(data, callback) {
       // filling in the popup DOM elements
-      document.getElementById('edge-label').value = data.label;
+      // document.getElementById('edge-label').value = data.label;
       document.getElementById('edge-saveButton').onclick = saveEdgeData.bind(this, data, callback);
       document.getElementById('edge-cancelButton').onclick = cancelEdgeEdit.bind(this,callback);
       document.getElementById('edge-popUp').style.display = 'block';
@@ -194,12 +197,10 @@ function draw() {
           }
         } 
       }
-      if(cont===0){
-        console.log("El grafo no es conexo");
-      }
-      else{
-        console.log("El grafo es conexo");
-      }
+      if(cont===0)
+        return false;
+      else
+        return true;
     }
 
     function MatrizCaminos(mAdyacencia, mCaminos){
@@ -261,20 +262,36 @@ function draw() {
       return tabla_padre;
     }
 
-    function show(){
+    function item_MatrizCamino(){
       //dibuja la matriz de adyacencia
       const padreAdy= document.querySelector("#matrizAdy");
       var matriz = MatrizAdyacencia();
       padreAdy.appendChild(dibujarMAtriz(matriz));
-    }
-    
-    function show2(){
       //dibuja la matriz de caminos
       var mAdyacencia= MatrizAdyacencia()
       const padreCam = document.querySelector("#matrizCam");
       matriz = MatrizCaminos(mAdyacencia, mCaminos);
       padreCam.appendChild(dibujarMAtriz(matriz));
+      //es o no conexo
+      const esConexo = document.querySelector("#esConexo");
+      var es_conexo = Conexo(matriz);
+      if(esConexo)
+        esConexo.textContent = "es Conexo";
+      else
+        esConexo.textContent = "no es Conexo";
     }
+
+    function item_CaminoCorto(){
+      const entrada_cc = document.querySelector("#inputEntrada");
+      const salida_cc = document.querySelector("#inputSalida");
+
+    }
+    
+    function item_FlujoMaximo(){
+      const entrada_fm = document.querySelector("#fm_Entrada");
+      const salida_fm = document.querySelector("#fm_Salida");
+    }
+    
     
     
 

@@ -2772,6 +2772,11 @@ DataSet.prototype._addItem = function (item) {
     // check whether this id is already taken
     if (this._data[id]) {
       // item already exists
+      confirm(`
+        Error !!
+        Debes ingresar un id diferente 
+        el id ${id} ya no está disponible
+      `);
       throw new Error('Cannot add item: item with id ' + id + ' already exists');
     }
   } else {
