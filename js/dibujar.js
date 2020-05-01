@@ -208,7 +208,11 @@ function draw() {
     }
     //Camino mas corto para dos nodos, mostrando la duracion y la ruta de dicho camino
     function CaminoCorto(){
-      console.log("mmm")
+      const nodo1 ="a"
+      const nodo2 = "f"
+      const a1 = ["a", "a", "b", "d", "d", "b", "f"]
+      const a2 = ["b", "e", "e", "a", "f", "c", "c"]
+      console.log(nodo1,nodo2)
 
     }
     function show(){
