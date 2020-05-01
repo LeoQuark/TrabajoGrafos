@@ -150,8 +150,61 @@ function draw() {
         mAdyacencia[i]=aux;
         aux=[];
       }
-      console.log(mAdyacencia)
+      console.log(mAdyacencia);
+      MatrizCaminos(mAdyacencia);
     }
+    function multiplicarMatriz(matriz1, matriz2,matrizF){
+      var aux1=0, suma=0, maux = [] //
+      for(let i=0; i<vertices.length;i++){ //avanza por las filas de la matriz1
+        for(let j=0; j<vertices.length;j++){ //avanza por las columnas de las matriz2
+          for(let k=0; k<vertices.length;k++){ 
+              suma+=matriz1[i][k] * matriz2[j][k]
+          }
+        maux.push(suma)
+        suma=0
+        }
+      matrizF[i]=maux;
+      maux=[]
+      }
+    }
+    function sumarMatrices(matriz1, matriz2, matrizF){
+      var maux=[]
+      for(let i=0; i<vertices.length;i++){
+        for(let j=0; j<vertices.length;j++){
+          maux.push(matriz1[i][j]+matriz2[i][j])
+        }
+        matrizF[i]=maux
+        maux=[]        
+      }
+    }
+    function Concexo(matriz){
+      var  cont=0;
+      for(let i=0; i<vertices.length;i++){
+        for(let j=0; j<vertices.length;j++){
+          if(matriz[i][j]===0){
+            cont++;
+          }
+        } 
+      }
+      if(cont===0){
+        console.log("El grafo es conexo")
+      }
+      else{
+        console.log("El grafo no es conexo")
+      }
+    }
+    function MatrizCaminos(mAdyacencia){
+      var mCaminos=[], mMultiplicada=[], mSuma=[]=mAdyacencia, aux = mAdyacencia, m2aux=[]
+ 
+      for(let i=0; i<((vertices.length)-1);i++){
+        multiplicarMatriz(mAdyacencia,aux,mMultiplicada);
+      }
+      sumarMatrices(mMultiplicada,mSuma,mCaminos)
+      aux=mMultiplicada
+      console.log(mCaminos)
+      Concexo(mCaminos)
+    }
+    //
     function show(){
       console.log(vertices);
       console.log(aristas_from);
