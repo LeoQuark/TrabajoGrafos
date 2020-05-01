@@ -6,6 +6,8 @@ var vertices = [];
 var aristas_from  = [];
 var aristas_to = [];
 var peso = []
+var mAdyacencia = []
+var mCaminos = []
 // randomly create some nodes and edges
 var data = getScaleFreeNetwork(25);
 var seed = 2;
@@ -137,9 +139,9 @@ function draw() {
         }
        }
     }
-    var mAdyacencia = []; //filas
-    function MatrizAdyacencia(mAdyacencia){
-      
+  
+    function MatrizAdyacencia(){
+      var mAdyacencia = []
       var aux = []; // columnas
       for(let i=0; i<vertices.length;i++){
         for(let j=0; j<vertices.length;j++){
@@ -153,9 +155,8 @@ function draw() {
         mAdyacencia[i]=aux;
         aux=[];
       }
-      // console.log(mAdyacencia);
-      // MatrizCaminos(mAdyacencia);
       return mAdyacencia;
+      // MatrizCaminos(mAdyacencia);
     }
 
     function multiplicarMatriz(matriz1, matriz2,matrizF){
@@ -201,22 +202,15 @@ function draw() {
       }
     }
 
-    function MatrizCaminos(mAdyacencia){
-      var mCaminos=[], mMultiplicada=[], mSuma=[]=mAdyacencia ,aux = mAdyacencia;
- 
+    function MatrizCaminos(mAdyacencia, mCaminos){
+      var mCaminos = [], mMultiplicada=[], mSuma=[]=mAdyacencia ,aux = mAdyacencia;
       for(let i=0; i<((vertices.length)-1);i++){
         multiplicarMatriz(mAdyacencia,aux,mMultiplicada);
       }
       sumarMatrices(mMultiplicada,mSuma,mCaminos);
       aux=mMultiplicada;
-      // console.log(mCaminos);
       // Conexo(mCaminos);
       return mCaminos;
-    }
-    //Camino mas corto para dos nodos, mostrando la duracion y la ruta de dicho camino
-    function CaminoCorto(){
-      console.log("mmm")
-
     }
 
     function dibujarMAtriz(matriz){
@@ -270,15 +264,16 @@ function draw() {
     function show(){
       //dibuja la matriz de adyacencia
       const padreAdy= document.querySelector("#matrizAdy");
-      var matriz = MatrizAdyacencia(mAdyacencia);
+      var matriz = MatrizAdyacencia();
       padreAdy.appendChild(dibujarMAtriz(matriz));
     }
     
     function show2(){
       //dibuja la matriz de caminos
+      var mAdyacencia= MatrizAdyacencia()
       const padreCam = document.querySelector("#matrizCam");
-      var matriz_cam = MatrizCaminos(mAdyacencia);
-      padreCam.appendChild(dibujarMAtriz(matriz_cam));
+      matriz = MatrizCaminos(mAdyacencia, mCaminos);
+      padreCam.appendChild(dibujarMAtriz(matriz));
     }
     
     
