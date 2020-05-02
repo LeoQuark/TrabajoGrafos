@@ -57,10 +57,19 @@
       <div class="row d-flex justify-content-around">
         <div class="col-lg-5 col-md-12 bg-white rounded shadow my-2">
           <div class="row my-2 pt-2 d-flex justify-content-center">
-            <h4 id="title" >Instrucciones</h4>
+            <h4 id="" >Instrucciones</h4>
           </div>
           <div class="row mx-2 my-2 pt-3">
-            <p>En esta sección podrás crear tu grafo, visualizarlo e interactuar con él. Sólo sigue los siguientes pasos:<br><br><strong>1.</strong> Presiona el botón inferior 'Comenzar'.<br><strong>2.</strong> Pulsa Editar.<br><strong>3.</strong> Añade un vértice o arista.<br><strong>4.</strong> Sigue las instrucciones de la parte superior (puedes agregar un peso a la arista, en caso de que sea un Grafo Etiquetado, de lo contrario, deja el cuadro vacío).<br><strong>5.</strong> Listo, vé a interactuar con tu Grafo</p>
+            <p><strong>1.</strong> Seleccione tipo de grafo:<p>
+              <select class="form-control" id="tipoGrafo">
+                <option value="Simple">Simple</option>
+                <option value="Dirigido">Dirigido</option>
+                <option value="Etiquetado">Etiquetado</option>
+              </select>
+              <br><strong>2.</strong> Presione comenzar.<br><strong>3.</strong> Seleccione editar y añada vértices o aristas.<br>
+              <strong>4.</strong> Sigue las instrucciones de la parte superior (puedes agregar un peso a la arista, 
+              en caso de que sea un Grafo Etiquetado, de lo contrario, deja el cuadro vacío).<br><strong>5.</strong> 
+              Listo, vé a interactuar con tu Grafo</p>
             <select id="locale" style="display: none;"><option value="es">es</option></select>
           </div>
           <div class="row d-flex justify-content-center my-2">
@@ -193,7 +202,7 @@
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Flujo Máximo</h4>
-                  </div>
+                  </div><br>
                   <p>Seleccione un vértice de <strong>entrada</strong> y otro de <strong>salida</strong>:</p>
                   <div class="row form-group d-flex justify-content-around">
                     <div class="col-5 pl-0 mx-2">
@@ -235,23 +244,28 @@
     <br>
     <br>
     <!--FOOTER-->
-    <footer class="fixed-bottom pt-1">
-        <div class="row my-2">
-            <div class="col d-flex justify-content-center">
-                <a href="https://github.com/LeoQuark/TrabajoGrafos" class="text-white">
-                    <i class="fab fa-github fa-lg mx-2"></i>
-                </a>
-                <a href="https://www.utem.cl/" class="text-white">
-                    <i class="fas fa-graduation-cap fa-lg mx-2"></i>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col d-flex justify-content-center text-white">
-                Copyright 2020<i class="far fa-copyright fa-sm mx-1 pt-1"></i>Ingeneria Civíl en Computación
-            </div>
-        </div>
-    </footer>
+    <div id="footer">
+      <div class="container">
+        <footer class="pt-1">
+          <div class="row my-2">
+              <div class="col d-flex justify-content-center">
+                  <a href="https://github.com/LeoQuark/TrabajoGrafos" class="text-white">
+                      <i class="fab fa-github fa-lg mx-2"></i>
+                  </a>
+                  <a href="https://www.utem.cl/" class="text-white">
+                      <i class="fas fa-graduation-cap fa-lg mx-2"></i>
+                  </a>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col d-flex justify-content-center text-white">
+                  Copyright 2020<i class="far fa-copyright fa-sm mx-1 pt-1"></i>Ingeneria Civíl en Computación
+              </div>
+          </div>
+      </footer>
+      </div>
+    </div>
+
 
     <!-- Optional JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>

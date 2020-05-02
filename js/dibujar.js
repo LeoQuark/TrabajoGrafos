@@ -52,6 +52,15 @@ function draw() {
             return;
           }
         }
+        var tipoGrafo = document.querySelector("#tipoGrafo").value;
+        if(tipoGrafo === 'Dirigido'){
+          var options = {
+            edges:{
+              arrows: 'to',
+            }
+          }
+          network.setOptions(options);
+        }
         document.getElementById('edge-operation').innerHTML = "Agregar Arista";
         editEdgeWithoutDrag(data, callback);
       },
@@ -288,8 +297,14 @@ function draw() {
     }
     
     function item_FlujoMaximo(){
-      const entrada_fm = document.querySelector("#fm_Entrada");
-      const salida_fm = document.querySelector("#fm_Salida");
+      const entrada = document.querySelector("#fm_Entrada").value;
+      const salida = document.querySelector("#fm_Salida").value;
+      var mAdyacencia = MatrizAdyacencia();
+      var p_inicial = peso , capacidad = [];
+      for(let i=0 ; i<p_inicial.length ; i++)
+        capacidad[i]=0;
+      // console.log(entrada,salida,p_inicial , capacidad);
+      
     }
     
     

@@ -9,7 +9,7 @@ nav{background-color:var(--marineBlue);}
 p{font-size: 18px;}
 strong{color: var(--marineBlue);}
 
-footer{
+#footer{
     background-color: var(--lightBlue);
 }
 
