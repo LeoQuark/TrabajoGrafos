@@ -684,7 +684,7 @@ function draw() {
       }while(cont!==0)
       return matriz_caminos
     }
-    
+
     function buscarCamino(nodo1, nodo2, matriz_caminos){
       var caminos = [], aux = [], cont = 0
       for(let i=0; i<matriz_caminos.length;i++){
@@ -696,14 +696,28 @@ function draw() {
       }
       return caminos
     }
+
+    function calcularPeso(matriz_caminos){
+      var camino_corto = [], aux = []
+      for(let i=0; i<matriz_caminos.length;i++){
+        var matriz = matriz_caminos[i]
+        for(let j=0; j<matriz.length;j++){
+          aux.push(buscarPeso(matriz[j],matriz[j+1]))
+
+        }
+        camino_corto[i] = aux
+      }
+      console.log("camino corto", camino_corto)
+      return camino_corto
+    }
     function CaminoCorto(nodo1, nodo2){
-      var matriz_final = [], matriz_caminos = []
+      var matriz_final = [], matriz_caminos = [], peso_caminos = []
       matriz_final = Caminos(nodo1,nodo2)
       matriz_caminos = buscarCamino(nodo1,nodo2,matriz_final)
-      console.log(matriz_caminos)
+      peso_caminos = calcularPeso(matriz_caminos)
+      console.log("peso caminos",peso_caminos)
       return matriz_final
     }
-
     function item_CaminoCorto(){
       //llamo a los input de entrada y salida
       const tipoGrafo = document.querySelector("#tipoGrafo").value;
@@ -713,7 +727,6 @@ function draw() {
       if(tipoGrafo === 'Dirigido'){
         matriz_caminos = CaminoCorto(entrada_cc,salida_cc)
         //console.log(matriz_caminos)
-      
       }
       
     }
