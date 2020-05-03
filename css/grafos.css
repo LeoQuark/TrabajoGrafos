@@ -58,6 +58,7 @@ div.table_description {
   text-align: center;
 }
 
+
 @media (min-width: 1000px){
   #node-popUp , #edge-popUp{
     top:200px;

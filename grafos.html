@@ -12,7 +12,6 @@
     <script type="text/javascript" src="js/dibujar.js"></script>
 
     <script src="https://kit.fontawesome.com/b097035380.js" crossorigin="anonymous"></script>
-    <script src="https://github.com/nuagenetworks/vis-graphs.git your-path"></script>
     <!-- vis -->
     <script type="text/javascript" src="exampleUtil.js"></script>
     <script type="text/javascript" src="dist/vis.js"></script>
@@ -22,7 +21,7 @@
 
     <title>Grafos | Análisis</title>
   </head>
-  <body background="img/spring.png" onload="init();">
+  <body background="img/spring.png">
  
       <!-- HEADER -->
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -117,30 +116,30 @@
           <div class="row my-2">
 
             <ul class="col-lg-3 col-sm-12 my-2 list-group list-group-flush">
-              <li onclick="item_MatrizCamino()" class="list-group-item analisis" id="item1" data-toggle="collapse" data-target="#MatrizCaminos" aria-expanded="false" aria-controls="MAtrizCaminos">
+              <li class="list-group-item analisis" data-toggle="collapse" data-target="#MatrizCaminos" aria-expanded="false" aria-controls="MAtrizCaminos">
                 Matriz de Caminos
-                <!-- <span><i class="fas fa-chevron-left fa-sm"></i></span> -->
               </li>
-              <li class="list-group-item analisis" id="item2" data-toggle="collapse" data-target="#CaminoCorto" aria-expanded="false" aria-controls="CaminoCorto">
+              <li class="list-group-item analisis" data-toggle="collapse" data-target="#CaminoCorto" aria-expanded="false" aria-controls="CaminoCorto">
                 Camino más corto
 
               </li>
-              <li class="list-group-item analisis" id="item3" data-toggle="collapse" data-target="#Hamil_Euler" aria-expanded="false" aria-controls="Hamil_Euler">
+              <li class="list-group-item analisis" data-toggle="collapse" data-target="#Hamil_Euler" aria-expanded="false" aria-controls="Hamil_Euler">
                 Hamiltoniano y/o Euleriano
               </li>
-              <li class="list-group-item analisis" id="item4" data-toggle="collapse" data-target="#FlujoMaximo" aria-expanded="false" aria-controls="FlujoMaximo">
+              <li class="list-group-item analisis" data-toggle="collapse" data-target="#FlujoMaximo" aria-expanded="false" aria-controls="FlujoMaximo">
                 Flujo Máximo
               </li>
-              <li class="list-group-item analisis" id="item5" data-toggle="collapse" data-target="#ArbolGenerador" aria-expanded="false" aria-controls="ArbolGenerador">
+              <li class="list-group-item analisis" data-toggle="collapse" data-target="#ArbolGenerador" aria-expanded="false" aria-controls="ArbolGenerador">
                 Árbol Generador Mínimo
               </li>
             </ul>
 
             <div class="col-lg-7 col-sm-12 my-2">
-              <div class="collapsing" id="MatrizCaminos" aria-labelledby="item1">
+              <div class="collapsing" id="MatrizCaminos" >
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Matriz de Caminos</h4>
+                    <button onclick="item_MatrizCamino()" id="item1" class="btn btn-primary ml-3" ><i class="fas fa-search fa-lg text-white"></i></button>
                   </div><br>
                   <p>En primer lugar obtenemos la <strong>Matriz de Adyacencia</strong> para el grafo ingresado:</p>
                   <br>
@@ -150,8 +149,7 @@
                     </div>
                   </div>
                   <br>
-                  <ps>Obteniendo la matriz de adyacencia, debemos elevar la matriz hasta <strong>n-1</strong> (siendo n = n° de vértices).
-                    Así logramos conseguir la <strong>Matriz de Caminos</strong> :
+                  <p>Obteniendo la matriz de adyacencia, debemos elevar la matriz hasta <strong>n-1</strong> (siendo n = n° de vértices). Así logramos conseguir la <strong>Matriz de Caminos</strong> :</p>
                   <br><br>
                   <div class="row">
                     <div class="col d-flex justify-content-center">
@@ -163,7 +161,7 @@
                 </div>
               </div>
 
-              <div class="collapsing" id="CaminoCorto" aria-labelledby="item2">
+              <div class="collapsing" id="CaminoCorto">
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Camino más corto</h4>
@@ -189,16 +187,17 @@
                 </div>
               </div>
 
-              <div class="collapsing" id="Hamil_Euler" aria-labelledby="item3">
+              <div class="collapsing" id="Hamil_Euler">
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Hamiltoniano y/o Euleriano</h4>
+                    <button onclick="item_MatrizCamino()" id="item3" class="btn btn-primary ml-3" ><i class="fas fa-search fa-lg text-white"></i></button>
                   </div><br>
                   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
                 </div>
               </div>
 
-              <div class="collapsing" id="FlujoMaximo" aria-labelledby="item4">
+              <div class="collapsing" id="FlujoMaximo">
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Flujo Máximo</h4>
@@ -229,6 +228,7 @@
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Árbol Generador Mínimo</h4>
+                    <button onclick="" id="item5" class="btn btn-primary ml-3" ><i class="fas fa-search fa-lg text-white"></i></button>
                   </div><br>
                   <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam exercitationem ipsa ex sed omnis nobis libero eos labore! Officia architecto ipsa sit explicabo expedita quas.</p>
                 </div>
@@ -244,7 +244,7 @@
     <br>
     <br>
     <!--FOOTER-->
-    <div id="footer">
+    <div>
       <div class="container">
         <footer class="pt-1">
           <div class="row my-2">

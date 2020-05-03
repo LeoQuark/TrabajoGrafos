@@ -9,7 +9,7 @@ nav{background-color:var(--marineBlue);}
 p{font-size: 18px;}
 strong{color: var(--marineBlue);}
 
-#footer{
+footer{
     background-color: var(--lightBlue);
 }
 
@@ -84,16 +84,21 @@ strong{color: var(--marineBlue);}
     font-size:large;
 
 }
-/* span{
-    padding-left: 35%;
-    transition: 0.5s;
-    position: absolute;
-}
 
-.analisis:hover span{
-    
-    transform: rotateY(180deg);
-} */
+#nombres{
+    list-style: none;
+    font-size: 18px;
+    transition: 0.1s;
+}
+#nombres:hover{
+    background-color: var(--marineBlue);
+    width: 150px;
+    color: white;
+    border-radius: 0.2rem;
+    font-size:large;
+    transform: scale(1.1);
+    box-shadow: 3px 3px 3px rgba(68,68,68,0.6);
+}
 
 
 

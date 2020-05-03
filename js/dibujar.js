@@ -8,6 +8,7 @@ var aristas_to = [];
 var peso = []
 var mAdyacencia = []
 var mCaminos = []
+
 // randomly create some nodes and edges
 var data = getScaleFreeNetwork(25);
 var seed = 2;
@@ -133,7 +134,10 @@ function draw() {
       data.label = document.getElementById('edge-label').value;
       aristas_from.push(data.from);
       aristas_to.push(data.to);
-      peso.push(data.label);
+      // peso.push(data.label);
+      var aux=[];
+      aux.push(data.from , data.to , data.label);
+      peso.push(aux);
       clearEdgePopUp();
       callback(data);
     }
@@ -145,11 +149,16 @@ function draw() {
 
     //a. matriz de caminos y grafo conexa o no
     function buscar(columna,fila){
+      var tipoGrafo = document.querySelector("#tipoGrafo").value;
       for(let i=0; i<(aristas_from.length);i++){
-        if(columna===aristas_from[i] && fila===aristas_to[i] || columna===aristas_to[i] && fila===aristas_from[i]){
-          return 1;
+        if(tipoGrafo === 'Dirigido'){
+          if(columna===aristas_from[i] && fila===aristas_to[i])
+              return 1;
+        }else{
+          if(columna===aristas_from[i] && fila===aristas_to[i] || columna===aristas_to[i] &&  fila===aristas_from[i])
+            return 1;
         }
-       }
+        }
     }
   
     function MatrizAdyacencia(){
@@ -207,12 +216,12 @@ function draw() {
         } 
       }
       if(cont===0)
-        return false;
-      else
         return true;
+      else
+        return false;
     }
 
-    function MatrizCaminos(mAdyacencia, mCaminos){
+    function MatrizCaminos(mAdyacencia){
       var mCaminos = [], mMultiplicada=[], mSuma=[]=mAdyacencia ,aux = mAdyacencia;
       for(let i=0; i<((vertices.length)-1);i++){
         multiplicarMatriz(mAdyacencia,aux,mMultiplicada);
@@ -222,7 +231,7 @@ function draw() {
       // Conexo(mCaminos);
       return mCaminos;
     }
-
+    
     function dibujarMAtriz(matriz){
       //creo los elementos y llamo a la tabla del html
       var tabla_padre = document.createElement('table');
@@ -272,40 +281,80 @@ function draw() {
     }
 
     function item_MatrizCamino(){
+      const boton = document.querySelector("#item1");
       //dibuja la matriz de adyacencia
       const padreAdy= document.querySelector("#matrizAdy");
       var matriz = MatrizAdyacencia();
       padreAdy.appendChild(dibujarMAtriz(matriz));
       //dibuja la matriz de caminos
-      var mAdyacencia= MatrizAdyacencia()
+      var MAdyacencia= MatrizAdyacencia()
       const padreCam = document.querySelector("#matrizCam");
-      matriz = MatrizCaminos(mAdyacencia, mCaminos);
-      padreCam.appendChild(dibujarMAtriz(matriz));
+      matriz_c = MatrizCaminos(MAdyacencia, mCaminos);
+      padreCam.appendChild(dibujarMAtriz(matriz_c));
       //es o no conexo
       const esConexo = document.querySelector("#esConexo");
-      var es_conexo = Conexo(matriz);
-      if(esConexo)
+      var es_conexo = Conexo(matriz_c);
+      if(es_conexo)
         esConexo.textContent = "es Conexo";
       else
         esConexo.textContent = "no es Conexo";
+      boton.disabled= true;
     }
 
     function item_CaminoCorto(){
+      //llamo a los input de entrada y salida
       const entrada_cc = document.querySelector("#inputEntrada");
       const salida_cc = document.querySelector("#inputSalida");
 
     }
+
+    function buscarPeso(columna,fila){
+      for(let i=0; i<(aristas_from.length);i++){
+        if(columna===aristas_from[i] && fila===aristas_to[i]){
+          return 1;
+        }
+       }
+    }
+
+    function MatrizDePeso(){ 
+      var mPeso = [] ;
+      var aux = []; // columnas
+      for(let i=0; i<vertices.length;i++){
+        for(let j=0; j<vertices.length;j++){
+          if(buscarPeso(vertices[i],vertices[j])===1){
+            aux.push( peso[j][2] );
+          }
+          else{
+            aux.push(0);
+          }    
+        }
+        mPeso[i]=aux;
+        aux=[];
+      }
+      return mPeso;
+      // MatrizCaminos(mAdyacencia);
+    }
+
     
     function item_FlujoMaximo(){
+      //llamo a los input de entrada y salida
       const entrada = document.querySelector("#fm_Entrada").value;
       const salida = document.querySelector("#fm_Salida").value;
       var mAdyacencia = MatrizAdyacencia();
-      var p_inicial = peso , capacidad = [];
-      for(let i=0 ; i<p_inicial.length ; i++)
+      var p_inicial = peso , capacidad = [] , aristas = [] , aux = [];
+      var grafo_aux = {};
+      for(let i=0 ; i<p_inicial.length ; i++){
         capacidad[i]=0;
-      // console.log(entrada,salida,p_inicial , capacidad);
-      
+        aux.push(aristas_to[i]);
+        aux.push(aristas_from[i]);
+        aristas.push(aux);
+      }
+      var matrizpeso = MatrizDePeso();
+      console.log(peso);
+      console.log(matrizpeso);  
     }
+
+    
     
     
     
