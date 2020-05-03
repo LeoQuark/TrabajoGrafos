@@ -5,8 +5,9 @@ var network = null;
 var vertices = [];
 var aristas_from  = [];
 var aristas_to = [];
-var peso = []
-var mAdyacencia = []
+var peso = [];
+var pesoAux;
+var mAdyacencia = [];
 var mCaminos = []
 var a_desde = [];
 var a_hacia = [];
@@ -416,42 +417,45 @@ function draw() {
                                     funciones para el arbol generador minimo (prim o kruskal)
     -----------------------------------------------------------------------------------------------------
      */
+    //Función que llena un Array para su uso.
+    function llenar(){
+       for (var i = 0; i < peso.length ; i++){
+         pesoAux[i] = peso[i][2];
+       }
+     }
     //Función que convierte String a Integer (Necesario para el ordenamiento de los Pesos de las Aristas)
-    function stringAInt(){
-      for (var i = 0; i < peso.length; i++ ){
-        var aux = peso[i];
-        aux = parseInt(peso[i], 10);
-        peso[i] = aux;
+    function stringAInt(boo){
+      for (var i = 0; i < boo.length; i++ ){
+        var aux = boo[i];
+        aux = parseInt(boo[i], 10);
+        boo[i] = aux;
       }
     }
 
     //Función que "ordena" las aristas (complementa a la función stringAInt)
     function order(){
-      for(var i = 0; i < peso.length ; i++){
+      for(var i = 0; i < pesoAux.length ; i++){
         if (aristas_from[i] > aristas_to[i]){
           var aux = aristas_from[i];
           aristas_from[i] = aristas_to[i];
           aristas_to[i] = aux;
         }
       }
-        /*console.log(aristas_from);
-        console.log(aristas_to);
-        console.log(peso);*/
     }
 
     //Función que ordena de manera ascendiente los pesos de las Aristas (necesita a la función stringAInt para un correcto desempeño)
     function bubble(){
-      var len = peso.length;    
+      var len = pesoAux.length;    
       for (var i = 0; i < len ; i++) {
         for(var j = 0 ; j < len - i - 1; j++){
-          if (peso[j] > peso[j + 1]){
-            var temp = peso[j];
+          if (pesoAux[j] > pesoAux[j + 1]){
+            var temp = pesoAux[j];
             var temp2 = aristas_from[j];
             var temp3 = aristas_to[j];
-            peso[j] = peso[j+1];
+            pesoAux[j] = pesoAux[j+1];
             aristas_from[j] = aristas_from[j+1];
             aristas_to[j] = aristas_to[j+1];
-            peso[j+1] = temp;
+            pesoAux[j+1] = temp;
             aristas_from[j+1] = temp2;
             aristas_to[j+1] = temp3;
           }
@@ -462,47 +466,45 @@ function draw() {
     /*------------------------------------------------------------------------------------------------------------------*/
     /* Función algoritmo Kruskal que modifica un Grafo Conexo Simple con Aristas de Peso 0 o Etiquetado a un Árbol Mínimo*/
     function Kruskal (){
-      var pesoMinimo = 0;
-      stringAInt();
+      var total = 0;
+      stringAInt(pesoAux);
       order();
       bubble();
-      for (var i = 0; i<peso.length;i++){   
+      for (var i = 0; i<pesoAux.length;i++){   
       if ((a_desde.includes(aristas_to[i], 0) == false) && (a_hacia.includes(aristas_from[i], 0) == false)){
         if (aristas_from[i] != aristas_from[i+1]){
           a_desde.push(aristas_from[i]);
           a_hacia.push(aristas_to[i]);
           contador++;
-          pesoMinimo=pesoMinimo+peso[i];
+          total = total + pesoAux[i];
         }
       }else if((a_desde.includes(aristas_from[i], 0) == false) && (a_hacia.includes(aristas_to[i], 0) == false)){
         if (aristas_from[i] != aristas_from[i+1]){
           a_desde.push(aristas_from[i]);
           a_hacia.push(aristas_to[i]);
           contador++;
-          pesoMinimo=pesoMinimo+peso[i];
+          total = total + pesoAux[i];
         }
       }else if((a_hacia.includes(aristas_from[i], 0) == false) && (a_hacia.includes(aristas_to[i], 0) == false)){
         if (aristas_from[i] != aristas_from[i+1]){
           a_desde.push(aristas_from[i]);
           a_hacia.push(aristas_to[i]);
           contador++;
-          pesoMinimo=pesoMinimo+peso[i];
+          total = total + pesoAux[i];
         }
       }else if((a_desde.includes(aristas_from[i], 0) == false) && (a_desde.includes(aristas_to[i], 0) == false)){
         if (aristas_from[i] != aristas_from[i+1]){
           a_desde.push(aristas_from[i]);
           a_hacia.push(aristas_to[i]);
           contador++;
-          pesoMinimo=pesoMinimo+peso[i];
+          total = total + pesoAux[i];
         }
       }
         if (contador == vertices.length){
           break;
         }
       }
-      // console.log(a_desde);
-      // console.log(a_hacia);
-      // console.log(pesoMinimo);
+      return total;
     }
 
     
@@ -766,11 +768,22 @@ function draw() {
 
     function item_ArbolGenerado(){
       const boton5 = document.querySelector("#item5");
-      var algoritmo_krukal = Kruskal();
+      var opcion = document.querySelector("#tipoGrafo").value;
+      if(opcion !== 'Dirigido'){
 
-      console.log(Kruskal());
+        var algoritmo_kruskal = Kruskal();
+        const arKruskal = document.querySelector("#generarKruskal");
+        const aristaEntrada = document.querySelector("#aEntrada");
+        const aristaSalida = document.querySelector("#aSalida");
+        arKruskal.textContent = algoritmo_kruskal;
+        aristaEntrada.textContent = a_desde;
+        aristaSalida.textContent = a_hacia;
+      }else{
+        const adv = document.querySelector("#advertencia");
+        adv.textContent = ["El Grafo ingresado es Dirigido. Por tanto no se puede calcular el Árbol Generador Mínimo"];
+      }
+      boton5.disabled=true;
     }
-   
 
     
 
