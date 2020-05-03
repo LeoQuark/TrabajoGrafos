@@ -233,9 +233,18 @@
                     <h4>Árbol Generador Mínimo</h4>
                     <button onclick="item_ArbolGenerado()" id="item5" class="btn btn-primary ml-3" ><em class="fas fa-search fa-lg text-white"></em></button>
                   </div><br>
-                  <p>Se obtiene el árbol generado mínimo mediante el algoritmo de <em>Kruskal</em>:</p>
+                  <p><strong id="advertencia"></strong></p>
+                  <p>Con el algoritmo de <strong>Kruskal</strong> el cual busca el <em>"Árbol Generador Mínimo"</em> obtendremos los siguientes Vértices que generarán nuestro árbol:</p>
                 </div>
-                <div id="generarKruskal"></div>
+                <div>
+                  Vértices <em>"DESDE"</em>: <strong id="aEntrada"></strong>
+                </div>
+                <div>
+                  Vértices <em>"HACIA"</em>: <strong id="aSalida"></strong>
+                </div>
+                <div>
+                  Y su <strong>Peso Mínimo</strong> es de: <strong id="generarKruskal"></strong>
+                </div>
               </div>
 
             </div>
