@@ -587,14 +587,137 @@ function draw() {
     }
 
 
+    /*---------------------------------------------------------------------------------------------------
+                                    funciones para el item 3
+    -----------------------------------------------------------------------------------------------------
+     */
+    function pares(arista1,arista2,matriz_pares){
+      var indice=arista1.length, matriz_aux = []
+      for(let i=0; i<indice;i++){
+        matriz_aux.push(arista1[i])
+        matriz_aux.push(arista2[i])
+        matriz_pares[i]=matriz_aux
+        matriz_aux=[]
+      }
+    }
+    function Buscar(matriz, nodo, matriz_ncaminos){
+      var indice=0
+      for(let i=0; i<matriz.length;i++){
+        if(nodo===matriz[i][0]){
+          console.log(i,"buscar, nodo",nodo)
+          var k = matriz[i].length
+          matriz_ncaminos[indice]=matriz[i][k-1]
+
+          indice++
+        }
+      }
+      matriz_ncamino=[]
+    }
+    function JuntarMatrices(matriz1, matriz2, matriz_final){
+      for(let i=0; i<matriz1.length;i++){
+        matriz_final.push(matriz1[i])
+      }
+      for(let j=0; j<matriz2.length;j++){
+        matriz_final.push(matriz2[j])
+      }
+    }
+    //
+    function Caminos(n1, n2){
+      //var n1="a", n2="f", nodo_b, matriz_caminos = []
+      var matriz_caminos = [], nodo_b
+      //const a1 = ["a", "b", "b", "a", "a", "d", "f"]  
+      //const a2 = ["b", "c", "e", "e", "d", "f", "c"]
+      const a1 = aristas_from, a2 = aristas_to
+      console.log(a1)
+      console.log(a2)
+      var matriz_pares = [], matriz_aux = [], matriz_aux2= [], matriz_aux3 = []
+      pares(a1,a2,matriz_pares)
+      matriz_caminos = matriz_pares
+      var contador=0
+      do{
+        var cont=0 //para ver cuantas filas nuevas se agregaron 
+        console.log("-----------------------")   
+        var aux=matriz_caminos.length
+        console.log(aux)
+        console.log("contador",contador,"aux",aux)
+        console.log(matriz_caminos.length)
+
+        for(let i=contador; i<aux;i++){
+          var j = matriz_caminos[i].length //j - 1 = ultima arista en la lista
+          console.log("i",i,"j",j)
+          nodo_b = matriz_caminos[i][j-1] //nodo que buscamos
+          console.log("nodo b - ",nodo_b)
+          Buscar(matriz_pares, nodo_b, matriz_aux)
+          console.log(i,"i - despues de buscar",matriz_aux)
+
+          if(matriz_aux!==[]){
+            if(matriz_aux.length===1){
+              console.log("if entro")
+              JuntarMatrices(matriz_caminos[i],matriz_aux,matriz_aux2)
+              matriz_caminos.push(matriz_aux2)
+              console.log("cont",cont)
+              cont++
+            }
+            else{
+              console.log("else entro")
+              for(let j=0; j<matriz_aux.length;j++){ //cuando se repite mas de una vez un nodo en la lista de pares
+                JuntarMatrices(matriz_caminos[i],matriz_aux[j],matriz_aux2)
+                console.log("for", matriz_aux2)
+                matriz_aux3[j]=matriz_aux2
+                cont++
+                console.log("cont",cont)
+               matriz_aux2 = [], matrix_aux= []
+              }
+              console.log("matriz_aux3",matriz_aux3)
+              for(let h=0; h<matriz_aux3.length;h++){
+                matriz_caminos.push(matriz_aux3[h])
+              }
+              matriz_aux3=[]
+            }
+          }
+          matriz_aux=[], matriz_aux2=[]
+        }
+        contador=aux
+        aux=aux+cont
+        console.log("FINAL CONT", cont)
+        console.log("contador al final",contador)
+      }while(cont!==0)
+      return matriz_caminos
+    }
+    
+    function buscarCamino(nodo1, nodo2, matriz_caminos){
+      var caminos = [], aux = [], cont = 0
+      for(let i=0; i<matriz_caminos.length;i++){
+        var matriz=matriz_caminos[i], k=matriz.length
+        if(matriz[0]===nodo1 && matriz[k-1]===nodo2){
+          caminos[cont] = matriz
+          cont++
+        }
+      }
+      return caminos
+    }
+    function CaminoCorto(nodo1, nodo2){
+      var matriz_final = [], matriz_caminos = []
+      matriz_final = Caminos(nodo1,nodo2)
+      matriz_caminos = buscarCamino(nodo1,nodo2,matriz_final)
+      console.log(matriz_caminos)
+      return matriz_final
+    }
 
     function item_CaminoCorto(){
       //llamo a los input de entrada y salida
-      const entrada_cc = document.querySelector("#inputEntrada");
-      const salida_cc = document.querySelector("#inputSalida");
-
+      const tipoGrafo = document.querySelector("#tipoGrafo").value;
+      const entrada_cc = document.querySelector("#inputEntrada").value;
+      const salida_cc = document.querySelector("#inputSalida").value; 
+      var matriz_caminos = []
+      if(tipoGrafo === 'Dirigido'){
+        matriz_caminos = CaminoCorto(entrada_cc,salida_cc)
+        //console.log(matriz_caminos)
+      
+      }
+      
     }
-
+ ////////////////
     function item_euleriano(){
       const boton = document.querySelector("#item3");
       const esEu = document.querySelector("#esEu");
@@ -612,8 +735,6 @@ function draw() {
         esHam.textContent = "No es Hamiltoniano";
 
     }
-
-    
 
     function item_FlujoMaximo(){
       //llamo a los input de entrada y salida
