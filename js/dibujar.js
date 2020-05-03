@@ -221,6 +221,98 @@ function draw() {
         return false;
     }
 
+    //// EULERIANO ////
+    function gradopar(matriz,vertices){  //debe ser conexo 
+      var par=0;                                 // todas las aristas de grado par
+      for(let i=0; i<vertices.length;i++){
+        for(let j=0; j<vertices.length;j++){
+        var suma= suma + matriz[i][j];
+        if (suma%2 == 0){
+          par++;}
+        }}
+        console.log(suma);
+      if (par===matriz.length)
+        return true;
+      else
+        return false;
+    }
+
+    function euleriano(Conexo, gradopar){
+      if (Conexo===true && gradopar===true ){
+        return true;
+      }
+      else
+        return false;
+    }
+    /*
+    function camino_euleriano(euleriano){
+      if(euleriano == true){
+      var camino = []
+        for(let i=0; i<vertices.length;i++){
+          for(let j=0; j<vertices.length;j++){
+            while(buscar(vertices[i],vertices[j])===1){
+              camino.push(vertices[i]);}
+            j
+          }
+      }}
+      }
+    */
+      //// HAMILTONIANO ////
+      
+    function grado(mAdyacencia){ ///mostrará los grados de cada arista
+      var listagrado = [];
+      for(let i=0; i<vertices.length;i++){
+        for(let j=0; j<vertices.length;j++){
+        var suma=0;  
+        var suma= suma + arista[i];
+        listagrado.push(suma);
+        } 
+        }
+      return listagrado;
+    }
+    function dirac(vertices, listagrado){ // para que se cumpla, deben haber mas de 3 vertices
+      var b=0;                            // el grado de todos los vertices debe ser >= (n/2) 
+      if(vertices.length>=3){
+        for(let i=0;i<listagrado.length; i++){
+          if(listagrado[i] < (vertice/2))
+            return 0;
+          else
+            b++;
+          }}
+      else
+        return 0;    
+    }
+    function ore(listagrado,vertice){   ///sumar vertices adyacentes y que el resultado sea >= n
+      if(vertices>=3){
+        if((listagrado[0]+listagrado[2] )>= (vertice/2))
+          return 0; 
+        else  
+          return 1;
+        }      
+    }
+
+    function grado_uno(listagrado){
+        for(let i=0;i<listagrado.length;i++){
+          if(listagrado[i]===1)
+          return 0
+        }
+    }
+    function hamiltoniano(dirac,ore, conexo, ){    // si se cumple ore o dirac es hamiltoniano 
+      if (conexo===true && dirac==0 ||conexo===true && ore==0 ){   // vertices tiene que tener grado mayor a 1
+        console.log("Si es Hamiltoniano");
+        return true;
+        }
+      else{
+        console.log("No es Hamiltoniano");
+        return false; }
+
+    }
+
+          //FIN
+
+
+
+
     function MatrizCaminos(mAdyacencia){
       var mCaminos = [], mMultiplicada=[], mSuma=[]=mAdyacencia ,aux = mAdyacencia;
       for(let i=0; i<((vertices.length)-1);i++){
@@ -301,10 +393,30 @@ function draw() {
       boton.disabled= true;
     }
 
+
+
     function item_CaminoCorto(){
       //llamo a los input de entrada y salida
       const entrada_cc = document.querySelector("#inputEntrada");
       const salida_cc = document.querySelector("#inputSalida");
+
+    }
+
+    function item_euleriano(){
+      const boton = document.querySelector("#item3");
+      const esEu = document.querySelector("#esEu");
+      var eu = euleriano(Conexo,gradopar);
+      if(eu)
+        esEu.textContent = "Es Euleriano";
+      else
+        esEu.textContent = "No es Euleriano";
+      //Hamiltoniano
+      const esHam = document.querySelector("#esHam");
+      var ham = hamiltoniano(dirac,ore,Conexo);
+      if(ham)
+        esHam.textContent = "Es Hamiltoniano";
+      else
+        esHam.textContent = "No es Hamiltoniano";
 
     }
 
