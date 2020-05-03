@@ -8,6 +8,9 @@ var aristas_to = [];
 var peso = []
 var mAdyacencia = []
 var mCaminos = []
+var a_desde = [];
+var a_hacia = [];
+var contador = 1;
 
 // randomly create some nodes and edges
 var data = getScaleFreeNetwork(25);
@@ -221,6 +224,17 @@ function draw() {
         return false;
     }
 
+    function MatrizCaminos(mAdyacencia){
+      var mCaminos = [], mMultiplicada=[], mSuma=[]=mAdyacencia ,aux = mAdyacencia;
+      for(let i=0; i<((vertices.length)-1);i++){
+        multiplicarMatriz(mAdyacencia,aux,mMultiplicada);
+      }
+      sumarMatrices(mMultiplicada,mSuma,mCaminos);
+      aux=mMultiplicada;
+      // Conexo(mCaminos);
+      return mCaminos;
+    }
+
     //// EULERIANO ////
     function gradopar(matriz,vertices){  //debe ser conexo 
       var par=0;                                 // todas las aristas de grado par
@@ -313,16 +327,189 @@ function draw() {
 
 
 
-    function MatrizCaminos(mAdyacencia){
-      var mCaminos = [], mMultiplicada=[], mSuma=[]=mAdyacencia ,aux = mAdyacencia;
-      for(let i=0; i<((vertices.length)-1);i++){
-        multiplicarMatriz(mAdyacencia,aux,mMultiplicada);
+    
+
+    /*---------------------------------------------------------------------------------------------------
+                                    Funciones para el item de flujo maximo
+    -----------------------------------------------------------------------------------------------------
+     */
+    function buscarPeso(columna,fila){
+      for(let i=0; i<aristas_from.length ;i++){
+        if(columna===aristas_from[i] && fila===aristas_to[i])
+          return peso[i];
       }
-      sumarMatrices(mMultiplicada,mSuma,mCaminos);
-      aux=mMultiplicada;
-      // Conexo(mCaminos);
-      return mCaminos;
     }
+
+    function MatrizDePeso(){ 
+      var mPeso = [];
+      var aux = []; // columnas
+      for(let i=0; i<vertices.length;i++){
+        for(let j=0; j<vertices.length;j++){
+          if(buscar(vertices[i],vertices[j])===1){
+            aux.push(buscarPeso(vertices[i],vertices[j]));
+          }
+          else{
+            aux.push(0);
+          }    
+        }
+        mPeso[i]=aux;
+        aux=[];
+      }
+      return mPeso;
+    }
+
+    function bfs(matrizR,s,t,parent){
+      var visitado = [],cola = [];
+      //arreglo que marca si todos los vértices son o no visitados
+      for(let i=0; i<vertices.length ; i++){
+        visitado[i]=false;
+      }
+      //la "cola" almacena el vertice de origen y si es visitado o no
+      cola.push(s);
+      visitado[s]=true;
+      parent[s]= -1;
+      //algoritmo "Breadth-first search"
+      while(cola.length != 0){
+        var aux = cola.shift();
+        for(let i=0; i<vertices.length; i++){
+          if(visitado[i]==false && matrizR[aux][i]>0){
+            cola.push(i);
+            parent[i]=aux;
+            visitado[i]=true;
+          }
+        }
+      }
+      //true si el vertice destino es encontrado
+      return (visitado[t] == true);
+      
+    }
+
+    //algoritmo FordFulkerson, retorna el flujo maximo
+    function algoritmoFlujoMaximo(matriz,s,t){
+      var matrizResidual=matriz;
+      console.log(matrizResidual);
+      //arreglo que almacena las rutas
+      var parent = new Array(vertices.length);
+      var flujo=0 , aux ,v;
+    
+      //aumentar el flujo mientras exista un camino
+      while(bfs(matrizResidual,s,t,parent)){
+        //encuentra la capacidad minima residual de las aristas
+        var flujoMax = Number.MAX_VALUE;
+        for(var v=t; v!=s; v = parent[v]){
+          aux = parent[v];
+          flujoMax = Math.min(flujoMax, matrizResidual[aux][v]);
+        }
+        //actualiza la capacidad residual de las aristas 
+        for(v=t; v!=s; v=parent[v]){
+          aux = parent[v];
+          matrizResidual[aux][v] -= flujoMax;
+          matrizResidual[v][aux] += flujoMax;
+        }
+        console.log(parent);
+        flujo += flujoMax;
+      }
+      return flujo;
+    }
+
+    /*---------------------------------------------------------------------------------------------------
+                                    funciones para el arbol generador minimo (prim o kruskal)
+    -----------------------------------------------------------------------------------------------------
+     */
+    //Función que convierte String a Integer (Necesario para el ordenamiento de los Pesos de las Aristas)
+    function stringAInt(){
+      for (var i = 0; i < peso.length; i++ ){
+        var aux = peso[i];
+        aux = parseInt(peso[i], 10);
+        peso[i] = aux;
+      }
+    }
+
+    //Función que "ordena" las aristas (complementa a la función stringAInt)
+    function order(){
+      for(var i = 0; i < peso.length ; i++){
+        if (aristas_from[i] > aristas_to[i]){
+          var aux = aristas_from[i];
+          aristas_from[i] = aristas_to[i];
+          aristas_to[i] = aux;
+        }
+      }
+        /*console.log(aristas_from);
+        console.log(aristas_to);
+        console.log(peso);*/
+    }
+
+    //Función que ordena de manera ascendiente los pesos de las Aristas (necesita a la función stringAInt para un correcto desempeño)
+    function bubble(){
+      var len = peso.length;    
+      for (var i = 0; i < len ; i++) {
+        for(var j = 0 ; j < len - i - 1; j++){
+          if (peso[j] > peso[j + 1]){
+            var temp = peso[j];
+            var temp2 = aristas_from[j];
+            var temp3 = aristas_to[j];
+            peso[j] = peso[j+1];
+            aristas_from[j] = aristas_from[j+1];
+            aristas_to[j] = aristas_to[j+1];
+            peso[j+1] = temp;
+            aristas_from[j+1] = temp2;
+            aristas_to[j+1] = temp3;
+          }
+        }
+      }
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------*/
+    /* Función algoritmo Kruskal que modifica un Grafo Conexo Simple con Aristas de Peso 0 o Etiquetado a un Árbol Mínimo*/
+    function Kruskal (){
+      var pesoMinimo = 0;
+      stringAInt();
+      order();
+      bubble();
+      for (var i = 0; i<peso.length;i++){   
+      if ((a_desde.includes(aristas_to[i], 0) == false) && (a_hacia.includes(aristas_from[i], 0) == false)){
+        if (aristas_from[i] != aristas_from[i+1]){
+          a_desde.push(aristas_from[i]);
+          a_hacia.push(aristas_to[i]);
+          contador++;
+          pesoMinimo=pesoMinimo+peso[i];
+        }
+      }else if((a_desde.includes(aristas_from[i], 0) == false) && (a_hacia.includes(aristas_to[i], 0) == false)){
+        if (aristas_from[i] != aristas_from[i+1]){
+          a_desde.push(aristas_from[i]);
+          a_hacia.push(aristas_to[i]);
+          contador++;
+          pesoMinimo=pesoMinimo+peso[i];
+        }
+      }else if((a_hacia.includes(aristas_from[i], 0) == false) && (a_hacia.includes(aristas_to[i], 0) == false)){
+        if (aristas_from[i] != aristas_from[i+1]){
+          a_desde.push(aristas_from[i]);
+          a_hacia.push(aristas_to[i]);
+          contador++;
+          pesoMinimo=pesoMinimo+peso[i];
+        }
+      }else if((a_desde.includes(aristas_from[i], 0) == false) && (a_desde.includes(aristas_to[i], 0) == false)){
+        if (aristas_from[i] != aristas_from[i+1]){
+          a_desde.push(aristas_from[i]);
+          a_hacia.push(aristas_to[i]);
+          contador++;
+          pesoMinimo=pesoMinimo+peso[i];
+        }
+      }
+        if (contador == vertices.length){
+          break;
+        }
+      }
+      // console.log(a_desde);
+      // console.log(a_hacia);
+      // console.log(pesoMinimo);
+    }
+
+    
+    /*---------------------------------------------------------------------------------------------------
+                                    Funcion quue dibuja matrices
+    -----------------------------------------------------------------------------------------------------
+     */
     
     function dibujarMAtriz(matriz){
       //creo los elementos y llamo a la tabla del html
@@ -372,6 +559,12 @@ function draw() {
       return tabla_padre;
     }
 
+
+    /*---------------------------------------------------------------------------------------------------
+                                    funciones para el item 2
+    -----------------------------------------------------------------------------------------------------
+     */
+
     function item_MatrizCamino(){
       const boton = document.querySelector("#item1");
       //dibuja la matriz de adyacencia
@@ -420,51 +613,35 @@ function draw() {
 
     }
 
-    function buscarPeso(columna,fila){
-      for(let i=0; i<(aristas_from.length);i++){
-        if(columna===aristas_from[i] && fila===aristas_to[i]){
-          return 1;
-        }
-       }
-    }
-
-    function MatrizDePeso(){ 
-      var mPeso = [] ;
-      var aux = []; // columnas
-      for(let i=0; i<vertices.length;i++){
-        for(let j=0; j<vertices.length;j++){
-          if(buscarPeso(vertices[i],vertices[j])===1){
-            aux.push( peso[j][2] );
-          }
-          else{
-            aux.push(0);
-          }    
-        }
-        mPeso[i]=aux;
-        aux=[];
-      }
-      return mPeso;
-      // MatrizCaminos(mAdyacencia);
-    }
-
     
+
     function item_FlujoMaximo(){
       //llamo a los input de entrada y salida
+      const boton4 = document.querySelector("#item4");
       const entrada = document.querySelector("#fm_Entrada").value;
       const salida = document.querySelector("#fm_Salida").value;
-      var mAdyacencia = MatrizAdyacencia();
-      var p_inicial = peso , capacidad = [] , aristas = [] , aux = [];
-      var grafo_aux = {};
-      for(let i=0 ; i<p_inicial.length ; i++){
-        capacidad[i]=0;
-        aux.push(aristas_to[i]);
-        aux.push(aristas_from[i]);
-        aristas.push(aux);
-      }
+      var s,t;
+      s = vertices.indexOf(entrada);
+      t = vertices.indexOf(salida);
       var matrizpeso = MatrizDePeso();
-      console.log(peso);
-      console.log(matrizpeso);  
+      var flujo_max = algoritmoFlujoMaximo(matrizpeso,s,t);
+      const output = document.querySelector("#salida_FlujoMaximo");
+      output.textContent = flujo_max;
+      boton4.disabled=true;
     }
+
+    function item_ArbolGenerado(){
+      const boton5 = document.querySelector("#item5");
+      var algoritmo_krukal = Kruskal();
+
+      console.log(Kruskal());
+    }
+   
+
+    
+
+    
+    
 
     
     

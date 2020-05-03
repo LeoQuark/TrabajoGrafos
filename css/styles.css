@@ -92,7 +92,7 @@ footer{
 }
 #nombres:hover{
     background-color: var(--marineBlue);
-    width: 150px;
+    width: 200px;
     color: white;
     border-radius: 0.2rem;
     font-size:large;
