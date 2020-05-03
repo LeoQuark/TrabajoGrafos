@@ -6,7 +6,7 @@ var vertices = [];
 var aristas_from  = [];
 var aristas_to = [];
 var peso = [];
-var pesoAux;
+var pesoAux = [];
 var mAdyacencia = [];
 var mCaminos = []
 var a_desde = [];
@@ -467,6 +467,7 @@ function draw() {
     /* Función algoritmo Kruskal que modifica un Grafo Conexo Simple con Aristas de Peso 0 o Etiquetado a un Árbol Mínimo*/
     function Kruskal (){
       var total = 0;
+      llenar();
       stringAInt(pesoAux);
       order();
       bubble();
