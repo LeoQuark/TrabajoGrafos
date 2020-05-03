@@ -21,17 +21,17 @@
 
     <title>Grafos | Análisis</title>
   </head>
-  <body background="img/spring.png">
+  <body background="img/spring.png"> <!--PONER EL BACK EN EL CSS-->
  
       <!-- HEADER -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <div class="row">
-                <a href="index.html"><img src="img/logo.svg" width="35" height="35"></a>
+                <a href="index.html"><img src="img/logo.svg" alt="descripcion" width="35" height="35"></a>
                 <a href="index.html" class="navbar-brand mx-3" id="navtitle">Trabajo Grafos</a>
             </div>
             <button class="navbar-toggler border border-light shadow-sm" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Menu">
-                <span class="material-icons text-white"><i class="fas fa-bars text-white"></i></span>
+                <span class="material-icons text-white"><em class="fas fa-bars text-white"></em></span>
               </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbar">
                 <div class="row">
@@ -79,11 +79,12 @@
         <div id="node-popUp">
           <span id="node-operation">Vértices</span>
           <table style="margin:auto;">
+            <caption></caption>
             <tr>
-              <td>id</td><td><input id="node-id" class="form-control" placeholder="id"/></td>
+              <th id="th-id">id</th><td><input id="node-id" class="form-control" placeholder="id"/></td>
             </tr>
             <tr style="display: none;" >
-              <td>Nombre</td><td><input id="node-label" class="form-control" placeholder="Nombre" /></td>
+              <th id="th-nombre">Nombre</th><td><input id="node-label" class="form-control" placeholder="Nombre" /></td>
             </tr>
           </table>
           <input type="button" class="btn btn-primary" value="Guardar" id="node-saveButton" />
@@ -93,8 +94,9 @@
           <span id="edge-operation">Aristas</span>
           <br>
           <table style="margin:auto;">
+            <caption></caption>
             <tr>
-              <td>Peso</td><td><input type="number" id="edge-label" class="form-control" min="0"/></td>
+              <th id="th-peso">Peso</th><td><input type="number" id="edge-label" class="form-control" min="0"/></td>
             </tr>
           </table>
           <input type="button" class="btn btn-primary"  value="Guardar" id="edge-saveButton" />
@@ -138,7 +140,7 @@
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Matriz de Caminos</h4>
-                    <button onclick="item_MatrizCamino()" id="item1" class="btn btn-primary ml-3" ><i class="fas fa-search fa-lg text-white"></i></button>
+                    <button onclick="item_MatrizCamino()" id="item1" class="btn btn-primary ml-3" ><em class="fas fa-search fa-lg text-white"></em></button>
                   </div><br>
                   <p>En primer lugar obtenemos la <strong>Matriz de Adyacencia</strong> para el grafo ingresado:</p>
                   <br>
@@ -190,7 +192,7 @@
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Hamiltoniano y/o Euleriano</h4>
-                    <button onclick="item_euleriano()" id="item3" class="btn btn-primary ml-3" ><i class="fas fa-search fa-lg text-white"></i></button>
+                    <button onclick="item_euleriano()" id="item3" class="btn btn-primary ml-3" ><em class="fas fa-search fa-lg text-white"></em></button>
                   </div><br>
                   <p>Podemos decir que el grafo : <strong id="esEu"></strong></p>
                   <p>Podemos decir que el grafo : <strong id="esHam"></strong></p>
@@ -229,7 +231,7 @@
                 <div class="">
                   <div class="row d-flex justify-content-center">
                     <h4>Árbol Generador Mínimo</h4>
-                    <button onclick="item_ArbolGenerado()" id="item5" class="btn btn-primary ml-3" ><i class="fas fa-search fa-lg text-white"></i></button>
+                    <button onclick="item_ArbolGenerado()" id="item5" class="btn btn-primary ml-3" ><em class="fas fa-search fa-lg text-white"></em></button>
                   </div><br>
                   <p>Se obtiene el árbol generado mínimo mediante el algoritmo de <em>Kruskal</em>:</p>
                 </div>
@@ -252,16 +254,16 @@
           <div class="row my-2">
               <div class="col d-flex justify-content-center">
                   <a href="https://github.com/LeoQuark/TrabajoGrafos" class="text-white">
-                      <i class="fab fa-github fa-lg mx-2"></i>
+                      <em class="fab fa-github fa-lg mx-2"></em>
                   </a>
                   <a href="https://www.utem.cl/" class="text-white">
-                      <i class="fas fa-graduation-cap fa-lg mx-2"></i>
+                      <em class="fas fa-graduation-cap fa-lg mx-2"></em>
                   </a>
               </div>
           </div>
           <div class="row">
               <div class="col d-flex justify-content-center text-white">
-                  Copyright 2020<i class="far fa-copyright fa-sm mx-1 pt-1"></i>Ingenería Civil en Computación
+                  Copyright 2020<em class="far fa-copyright fa-sm mx-1 pt-1"></em>Ingenería Civil en Computación
               </div>
           </div>
       </footer>
