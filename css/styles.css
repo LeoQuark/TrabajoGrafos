@@ -5,6 +5,9 @@
     --lightBlue:#18A4E0;
     --nordicBreeze: #D3DDE6;
 }
+body{
+    background-image: url("../img/spring.png");
+}
 nav{background-color:var(--marineBlue);}
 p{font-size: 18px;}
 strong{color: var(--marineBlue);}
