@@ -82,7 +82,7 @@ footer{
 }
 .analisis:hover{
     background-color: var(--marineBlue);
-    transform: scale(1.2);
+    transform: scale(1.05);
     color: white;
     font-size:large;
 

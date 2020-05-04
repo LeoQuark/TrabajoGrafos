@@ -67,7 +67,7 @@
               <br><strong>2.</strong> Presione comenzar.<br><strong>3.</strong> Seleccione editar y añada vértices o aristas.<br>
               <strong>4.</strong> Sigue las instrucciones de la parte superior (puedes agregar un peso a la arista, 
               en caso de que sea un Grafo Etiquetado, de lo contrario, deja el cuadro vacío).<br><strong>5.</strong> 
-              Listo, vé a interactuar con tu Grafo</p>
+              Listo, vé a interactuar con tu Grafo.</p>
             <select id="locale" style="display: none;"><option value="es">es</option></select>
           </div>
           <div class="row d-flex justify-content-center my-2">
@@ -180,10 +180,13 @@
                   </div>
                   <div class="row">
                     <div class="col d-flex justify-content-center">
-                      <a onclick="item_CaminoCorto()" id="btnComenzar" style="text-decoration:none">Analizar</a>
+                      <button onclick="item_CaminoCorto()" id="item2" class="btn btn-primary text-white">Analizar</button>
                     </div>
                   </div>
-                  <div id="Camino_corto">
+                  <br>
+                  <div >
+                    <p>El camino más corto encontrado entre los vértices ingresados es:</p><br>
+                    <p class="text-center text-uppercase"><strong id="Camino_corto"></strong></p>
                   </div>
                 </div>
               </div>

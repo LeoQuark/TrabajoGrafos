@@ -726,22 +726,35 @@ function hamiltoniano(dirac,ore, conexo){    // si se cumple ore o dirac es hami
       matriz_caminos = buscarCamino(nodo1,nodo2,matriz_final) //matriz_caminos -->> buscarCamino 
       peso_caminos = calcularPeso(matriz_caminos)  //
       indice = compararPesos(matriz_caminos, peso_caminos)
-      return indice
-      //console.log("camino mas corto + pesos",matriz_caminos[indice],peso_caminos[indice])
-      //return matriz_caminos[indice],peso_caminos[indice]
+      return indice;
     }
     function item_CaminoCorto(){
       //llamo a los input de entrada y salida
       const entrada_cc = document.querySelector("#inputEntrada").value;
       const salida_cc = document.querySelector("#inputSalida").value; 
-      var indice
-      indice = CaminoCorto(entrada_cc,salida_cc)
-      console.log(matriz_caminos)
-      console.log(matriz_caminos[indice], "---", peso_caminos[indice])
+      const Camino_corto = document.querySelector("#Camino_corto");
+      const boton2 = document.querySelector("#item2");
+      var indice ,s,t;
+      s = vertices.indexOf(entrada_cc);
+      t = vertices.indexOf(salida_cc);
+      if( s == -1 || t == -1 ){
+        alert(`Error\nDebe ingresar vértices validos, que se hayan agregado a la hora de crear el grafo.\nIntentelo nuevamente.`);
+      }else{
+        indice = CaminoCorto(entrada_cc,salida_cc);
+        var matrizCorta =  matriz_caminos[indice];
+        var pesoCorto = peso_caminos[indice];
+        console.log(matriz_caminos[indice], "---", peso_caminos[indice]);
+        var cortito, aux=``;
+        //muestra en html el camino mas corto
+        for(let i=0; i<peso_caminos.length; i++){
+          cortito =` ${matrizCorta[i]} --${pesoCorto[i]}-->`;
+          aux += cortito;
+        }
+        aux+=`${matrizCorta[(matrizCorta.length-1)]}`;
+        Camino_corto.textContent=aux;
+        boton2.disabled=true;
+      }
     }
-
-
-
     /*---------------------------------------------------------------------------------------------------
                                     funciones para el item 4
     -----------------------------------------------------------------------------------------------------
