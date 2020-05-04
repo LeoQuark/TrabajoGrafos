@@ -13,7 +13,7 @@
 
     <script src="https://kit.fontawesome.com/b097035380.js" crossorigin="anonymous"></script>
     <!-- vis -->
-    <script type="text/javascript" src="exampleUtil.js"></script>
+    <script type="text/javascript" src="js/exampleUtil.js"></script>
     <script type="text/javascript" src="dist/vis.js"></script>
     <link href="dist/vis-network.min.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="img/logo.svg">
@@ -217,10 +217,11 @@
                   </div>
                   <div class="row">
                     <div class="col  d-flex justify-content-center">
-                      <button onclick="item_FlujoMaximo()" id="item4" class="btn btn-primary text-white" style="text-decoration:none">Analizar</button>
+                      <button onclick="item_FlujoMaximo()" id="item4" class="btn btn-primary text-white" style="text-decoration:none"">Analizar</button>
                     </div>
                   </div>
                   <br>
+                  <div id="alerta"></div>
                   <div>
                     <p>El Flujo Máximo para el grafo ingresado es: <strong id="salida_FlujoMaximo"></strong> .</p>
                   </div>
@@ -233,7 +234,6 @@
                     <h4>Árbol Generador Mínimo</h4>
                     <button onclick="item_ArbolGenerado()" id="item5" class="btn btn-primary ml-3" ><em class="fas fa-search fa-lg text-white"></em></button>
                   </div><br>
-                  <p><strong id="advertencia"></strong></p>
                   <p>Con el algoritmo de <strong>Kruskal</strong> el cual busca el <em>"Árbol Generador Mínimo"</em> obtendremos los siguientes Vértices que generarán nuestro árbol:</p>
                 </div>
                 <div>

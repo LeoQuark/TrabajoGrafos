@@ -138,10 +138,8 @@ function draw() {
       data.label = document.getElementById('edge-label').value;
       aristas_from.push(data.from);
       aristas_to.push(data.to);
-      // peso.push(data.label);
-      var aux=[];
-      aux.push(data.from , data.to , data.label);
-      peso.push(aux);
+      peso.push(data.label);
+      
       clearEdgePopUp();
       callback(data);
     }
@@ -150,6 +148,8 @@ function draw() {
       setDefaultLocale();
       draw();
     }
+
+    
 
     //a. matriz de caminos y grafo conexa o no
     function buscar(columna,fila){
@@ -181,7 +181,6 @@ function draw() {
         aux=[];
       }
       return mAdyacencia;
-      // MatrizCaminos(mAdyacencia);
     }
 
     function multiplicarMatriz(matriz1, matriz2,matrizF){
@@ -336,8 +335,9 @@ function draw() {
      */
     function buscarPeso(columna,fila){
       for(let i=0; i<aristas_from.length ;i++){
-        if(columna===aristas_from[i] && fila===aristas_to[i])
+        if(columna===aristas_from[i] && fila===aristas_to[i]){
           return peso[i];
+        }
       }
     }
 
@@ -388,7 +388,6 @@ function draw() {
     //algoritmo FordFulkerson, retorna el flujo maximo
     function algoritmoFlujoMaximo(matriz,s,t){
       var matrizResidual=matriz;
-      console.log(matrizResidual);
       //arreglo que almacena las rutas
       var parent = new Array(vertices.length);
       var flujo=0 , aux ,v;
@@ -407,14 +406,13 @@ function draw() {
           matrizResidual[aux][v] -= flujoMax;
           matrizResidual[v][aux] += flujoMax;
         }
-        console.log(parent);
         flujo += flujoMax;
       }
       return flujo;
     }
 
     /*---------------------------------------------------------------------------------------------------
-                                    funciones para el arbol generador minimo (prim o kruskal)
+                                    funciones para el arbol generador minimo (kruskal)
     -----------------------------------------------------------------------------------------------------
      */
     //Función que llena un Array para su uso.
@@ -754,35 +752,41 @@ function draw() {
 
     function item_FlujoMaximo(){
       //llamo a los input de entrada y salida
+      var s,t;
       const boton4 = document.querySelector("#item4");
       const entrada = document.querySelector("#fm_Entrada").value;
       const salida = document.querySelector("#fm_Salida").value;
-      var s,t;
-      s = vertices.indexOf(entrada);
-      t = vertices.indexOf(salida);
-      var matrizpeso = MatrizDePeso();
-      var flujo_max = algoritmoFlujoMaximo(matrizpeso,s,t);
-      const output = document.querySelector("#salida_FlujoMaximo");
-      output.textContent = flujo_max;
-      boton4.disabled=true;
+      var tipoGrafo = document.querySelector("#tipoGrafo").value;
+      if(tipoGrafo === "Dirigido"){
+        s = vertices.indexOf(entrada);
+        t = vertices.indexOf(salida);
+        if(s == -1 || t == -1){
+          alert(`Error\nDebe ingresar vértices validos, que se hayan agregado a la hora de crear el grafo.\nIntentelo nuevamente.`);
+        }else{
+          var matrizpeso = MatrizDePeso();
+          var flujo_max = algoritmoFlujoMaximo(matrizpeso,s,t);
+          const output = document.querySelector("#salida_FlujoMaximo");
+          output.textContent = flujo_max;
+          boton4.disabled=true;
+        }
+        
+      }else{
+        const alerta = document.querySelector("#alerta");
+        alerta.textContent =`Sólo puede obtener el flujo máximo de un grafo dirigido`;
+        alerta.className="alert alert-danger text-center";
+      }
     }
 
     function item_ArbolGenerado(){
       const boton5 = document.querySelector("#item5");
       var opcion = document.querySelector("#tipoGrafo").value;
-      if(opcion !== 'Dirigido'){
-
-        var algoritmo_kruskal = Kruskal();
-        const arKruskal = document.querySelector("#generarKruskal");
-        const aristaEntrada = document.querySelector("#aEntrada");
-        const aristaSalida = document.querySelector("#aSalida");
-        arKruskal.textContent = algoritmo_kruskal;
-        aristaEntrada.textContent = a_desde;
-        aristaSalida.textContent = a_hacia;
-      }else{
-        const adv = document.querySelector("#advertencia");
-        adv.textContent = ["El Grafo ingresado es Dirigido. Por tanto no se puede calcular el Árbol Generador Mínimo"];
-      }
+      var algoritmo_kruskal = Kruskal();
+      const arKruskal = document.querySelector("#generarKruskal");
+      const aristaEntrada = document.querySelector("#aEntrada");
+      const aristaSalida = document.querySelector("#aSalida");
+      arKruskal.textContent = algoritmo_kruskal;
+      aristaEntrada.textContent = a_desde;
+      aristaSalida.textContent = a_hacia;
       boton5.disabled=true;
     }
 
