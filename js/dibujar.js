@@ -593,6 +593,8 @@ function draw() {
     -----------------------------------------------------------------------------------------------------
      */
     function pares(arista1,arista2,matriz_pares){
+      var tipoGrafo = document.querySelector("#tipoGrafo").value;
+      console.log(tipoGrafo)
       var indice=arista1.length, matriz_aux = []
       for(let i=0; i<indice;i++){
         matriz_aux.push(arista1[i])
@@ -600,15 +602,28 @@ function draw() {
         matriz_pares[i]=matriz_aux
         matriz_aux=[]
       }
+      console.log(matriz_aux)
+      if(tipoGrafo === "Simple"){
+        var len = matriz_pares.length -1
+        console.log("entro if pares",len)
+        for(let j=0; j<indice;j++){
+          console.log(arista2[j],arista1[j])
+          matriz_aux.push(arista2[j])
+          matriz_aux.push(arista1[j])
+          console.log(matriz_aux)
+          len++
+          matriz_pares[len]=matriz_aux
+          matriz_aux=[]
+        }
+      }
+      console.log(matriz_pares)
     }
     function Buscar(matriz, nodo, matriz_ncaminos){
       var indice=0
       for(let i=0; i<matriz.length;i++){
         if(nodo===matriz[i][0]){
-          console.log(i,"buscar, nodo",nodo)
           var k = matriz[i].length
           matriz_ncaminos[indice]=matriz[i][k-1]
-
           indice++
         }
       }
@@ -624,52 +639,32 @@ function draw() {
     }
     //
     function Caminos(n1, n2){
-      //var n1="a", n2="f", nodo_b, matriz_caminos = []
       var matriz_caminos = [], nodo_b
-      //const a1 = ["a", "b", "b", "a", "a", "d", "f"]  
-      //const a2 = ["b", "c", "e", "e", "d", "f", "c"]
       const a1 = aristas_from, a2 = aristas_to
-      console.log(a1)
-      console.log(a2)
       var matriz_pares = [], matriz_aux = [], matriz_aux2= [], matriz_aux3 = []
       pares(a1,a2,matriz_pares)
       matriz_caminos = matriz_pares
       var contador=0
       do{
         var cont=0 //para ver cuantas filas nuevas se agregaron 
-        console.log("-----------------------")   
         var aux=matriz_caminos.length
-        console.log(aux)
-        console.log("contador",contador,"aux",aux)
-        console.log(matriz_caminos.length)
-
         for(let i=contador; i<aux;i++){
           var j = matriz_caminos[i].length //j - 1 = ultima arista en la lista
-          console.log("i",i,"j",j)
           nodo_b = matriz_caminos[i][j-1] //nodo que buscamos
-          console.log("nodo b - ",nodo_b)
           Buscar(matriz_pares, nodo_b, matriz_aux)
-          console.log(i,"i - despues de buscar",matriz_aux)
-
           if(matriz_aux!==[]){
             if(matriz_aux.length===1){
-              console.log("if entro")
               JuntarMatrices(matriz_caminos[i],matriz_aux,matriz_aux2)
               matriz_caminos.push(matriz_aux2)
-              console.log("cont",cont)
               cont++
             }
             else{
-              console.log("else entro")
               for(let j=0; j<matriz_aux.length;j++){ //cuando se repite mas de una vez un nodo en la lista de pares
                 JuntarMatrices(matriz_caminos[i],matriz_aux[j],matriz_aux2)
-                console.log("for", matriz_aux2)
                 matriz_aux3[j]=matriz_aux2
                 cont++
-                console.log("cont",cont)
                matriz_aux2 = [], matrix_aux= []
               }
-              console.log("matriz_aux3",matriz_aux3)
               for(let h=0; h<matriz_aux3.length;h++){
                 matriz_caminos.push(matriz_aux3[h])
               }
@@ -680,12 +675,9 @@ function draw() {
         }
         contador=aux
         aux=aux+cont
-        console.log("FINAL CONT", cont)
-        console.log("contador al final",contador)
       }while(cont!==0)
       return matriz_caminos
     }
-
     function buscarCamino(nodo1, nodo2, matriz_caminos){
       var caminos = [], aux = [], cont = 0
       for(let i=0; i<matriz_caminos.length;i++){
@@ -697,40 +689,61 @@ function draw() {
       }
       return caminos
     }
-
+    //funcion para calcular los pesos de la matriz_caminos
     function calcularPeso(matriz_caminos){
-      var camino_corto = [], aux = []
+      var camino_corto = [], aux = [] 
       for(let i=0; i<matriz_caminos.length;i++){
         var matriz = matriz_caminos[i]
-        for(let j=0; j<matriz.length;j++){
-          aux.push(buscarPeso(matriz[j],matriz[j+1]))
-
+        for(let j=1; j<matriz.length;j++){
+          var peso = buscarPeso(matriz[j-1],matriz[j]), lar = peso.length
+          aux.push(peso[lar-1])
         }
         camino_corto[i] = aux
+        aux = []
       }
-      console.log("camino corto", camino_corto)
       return camino_corto
     }
-    function CaminoCorto(nodo1, nodo2){
-      var matriz_final = [], matriz_caminos = [], peso_caminos = []
+    function sumarMatriz(matriz){ //peso_caminos = [1,2,3], suma = 6
+      var suma = 0
+      for(let i=0; i<matriz.length;i++){
+        var str = matriz[i], num = parseInt(str)
+        suma = suma + num
+        console.log(suma)
+      }
+      return suma
+    }
+    function compararPesos(matriz_caminos, peso_caminos){
+      var peso, indice = 0, peso_menor = sumarMatriz(peso_caminos[0])  //peso menor = (indice,peso)
+      for(let i=0; i<matriz_caminos.length;i++){
+        peso = sumarMatriz(peso_caminos[i])
+        console.log("peso",peso)
+        if(peso < peso_menor){
+          peso_menor=peso
+          indice = i
+          console.log("peso",peso_menor)
+        }
+      }
+
+      return indice
+    }
+    function CaminoCorto(nodo1, nodo2){ //caminos que empiecen en nodo1 y terminen en nodo2 guardados en matriz_final
+      var matriz_final = [], matriz_caminos = [], peso_caminos = [], indice_camino
       matriz_final = Caminos(nodo1,nodo2)
-      matriz_caminos = buscarCamino(nodo1,nodo2,matriz_final)
-      peso_caminos = calcularPeso(matriz_caminos)
-      console.log("peso caminos",peso_caminos)
+      matriz_caminos = buscarCamino(nodo1,nodo2,matriz_final) //matriz_caminos -->> buscarCamino 
+      peso_caminos = calcularPeso(matriz_caminos)  //
+      indice = compararPesos(matriz_caminos, peso_caminos)
+      console.log("camino mas corto",matriz_caminos[indice],peso_caminos[indice])
       return matriz_final
     }
     function item_CaminoCorto(){
       //llamo a los input de entrada y salida
-      const tipoGrafo = document.querySelector("#tipoGrafo").value;
       const entrada_cc = document.querySelector("#inputEntrada").value;
       const salida_cc = document.querySelector("#inputSalida").value; 
       var matriz_caminos = []
-      if(tipoGrafo === 'Dirigido'){
-        matriz_caminos = CaminoCorto(entrada_cc,salida_cc)
-        //console.log(matriz_caminos)
-      }
-      
+      matriz_caminos = CaminoCorto(entrada_cc,salida_cc)
+      console.log(matriz_caminos)
     }
+    
  ////////////////
     function item_euleriano(){
       const boton = document.querySelector("#item3");
