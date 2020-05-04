@@ -512,7 +512,6 @@ function draw() {
       console.log(matriz_aux)
       if(tipoGrafo === "Simple"){
         var len = matriz_pares.length -1
-        console.log("entro if pares",len)
         for(let j=0; j<indice;j++){
           console.log(arista2[j],arista1[j])
           matriz_aux.push(arista2[j])
@@ -603,11 +602,15 @@ function draw() {
         var matriz = matriz_caminos[i]
         for(let j=1; j<matriz.length;j++){
           var peso = buscarPeso(matriz[j-1],matriz[j]), lar = peso.length
+          if(peso===0){
+            peso=1
+          }
           aux.push(peso[lar-1])
         }
         camino_corto[i] = aux
         aux = []
       }
+
       return camino_corto
     }
     function sumarMatriz(matriz){ //peso_caminos = [1,2,3], suma = 6
@@ -630,7 +633,6 @@ function draw() {
           console.log("peso",peso_menor)
         }
       }
-
       return indice
     }
     function CaminoCorto(nodo1, nodo2){ //caminos que empiecen en nodo1 y terminen en nodo2 guardados en matriz_final
@@ -718,7 +720,6 @@ function draw() {
     }
     else
       return false
-
   }
     function item_euleriano(){
       const boton = document.querySelector("#item3");
@@ -729,23 +730,11 @@ function draw() {
       else
         esEu.textContent = "No es Euleriano";
       boton.disabled=true;
-      
-      //Hamiltoniano
-      /*
-      const esHam = document.querySelector("#esHam");
-      var ham = hamiltoniano(dirac,ore,Conexo);
-      if(ham)
-        esHam.textContent = "Es Hamiltoniano";
-      else
-        esHam.textContent = "No es Hamiltoniano";
-    */
     }
     /*---------------------------------------------------------------------------------------------------
                                     funciones para el item 5
     -----------------------------------------------------------------------------------------------------
      */
-
-
     function item_FlujoMaximo(){
       //llamo a los input de entrada y salida
       var s,t;
