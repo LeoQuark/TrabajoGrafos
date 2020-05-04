@@ -381,6 +381,7 @@ function draw() {
         }
       }
       //true si el vertice destino es encontrado
+      console.log(`Visitado[${t}]: ${visitado[t]}`);
       return (visitado[t] == true);
       
     }
@@ -407,6 +408,7 @@ function draw() {
           matrizResidual[v][aux] += flujoMax;
         }
         flujo += flujoMax;
+        console.log(`Flujo: ${flujo}`);
       }
       return flujo;
     }
@@ -779,6 +781,8 @@ function draw() {
           alert(`Error\nDebe ingresar vértices validos, que se hayan agregado a la hora de crear el grafo.\nIntentelo nuevamente.`);
         }else{
           var matrizpeso = MatrizDePeso();
+          console.log("Matriz de distancia:");
+          console.log(matrizpeso);
           var flujo_max = algoritmoFlujoMaximo(matrizpeso,s,t);
           const output = document.querySelector("#salida_FlujoMaximo");
           output.textContent = flujo_max;
