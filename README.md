@@ -2,7 +2,7 @@
 
 Implementación web diseñada para la visualización y/o análisis de grafos.
 
-- Visite la web : [trabajografos](https://www.https://leoquark.github.io/TrabajoGrafos/)
+- Visite la web : [trabajografos](https://leoquark.github.io/TrabajoGrafos/)
 
 ## Instrucciones
 
