@@ -727,21 +727,23 @@ function draw() {
       return indice
     }
     function CaminoCorto(nodo1, nodo2){ //caminos que empiecen en nodo1 y terminen en nodo2 guardados en matriz_final
-      var matriz_final = [], matriz_caminos = [], peso_caminos = [], indice_camino
+      var matriz_final = [], indice//, matriz_caminos = [], peso_caminos = []
       matriz_final = Caminos(nodo1,nodo2)
       matriz_caminos = buscarCamino(nodo1,nodo2,matriz_final) //matriz_caminos -->> buscarCamino 
       peso_caminos = calcularPeso(matriz_caminos)  //
       indice = compararPesos(matriz_caminos, peso_caminos)
-      console.log("camino mas corto",matriz_caminos[indice],peso_caminos[indice])
-      return matriz_final
+      return indice
+      //console.log("camino mas corto + pesos",matriz_caminos[indice],peso_caminos[indice])
+      //return matriz_caminos[indice],peso_caminos[indice]
     }
     function item_CaminoCorto(){
       //llamo a los input de entrada y salida
       const entrada_cc = document.querySelector("#inputEntrada").value;
       const salida_cc = document.querySelector("#inputSalida").value; 
-      var matriz_caminos = []
-      matriz_caminos = CaminoCorto(entrada_cc,salida_cc)
+      var indice
+      indice = CaminoCorto(entrada_cc,salida_cc)
       console.log(matriz_caminos)
+      console.log(matriz_caminos[indice], "---", peso_caminos[indice])
     }
     
  ////////////////
