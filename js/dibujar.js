@@ -234,93 +234,6 @@ function draw() {
       // Conexo(mCaminos);
       return mCaminos;
     }
-
-    //// EULERIANO ////
-function grado(matriz){ ///mostrará los grados de cada arista
-  var listagrado = [];
-  var grado=0;
-  for(let i=0; i<vertices.length;i++){
-    grado=0;  
-    for(let j=0; j<vertices.length;j++){
-      grado += matriz[i][j];
-      listagrado.push(grado);
-    } 
-    }
-  return listagrado;
-}
-
-function gradopar(listagrado){           //Debe ser conexo 
-  var par=0;                              // Todas las aristas de grado par
-  for(let i=0; i<listagrado.length;i++){
-    if((listagrado[i]%2) === 0)
-      par++;
-    }
-  if (par===listagrado.length)
-    return true;
-  else
-    return false;
-}
-
-function euleriano(gradopar){
-  if (gradopar==true){
-    return true;
-  }
-  else
-    return false;
-}
-/*
-
-  //// HAMILTONIANO ////
-
-function dirac(vertices, listagrado){ // para que se cumpla, deben haber mas de 3 vertices
-  var b=0;                            // el grado de todos los vertices debe ser >= (n/2) 
-  if(vertices.length>=3){
-    for(let i=0;i<listagrado.length; i++){
-      if(listagrado[i] < (vertice/2))
-        return false;
-      else
-        b++;
-      }}
-  else
-    return false;    
-}
-function ore(listagrado,vertice){   ///sumar vertices adyacentes y que el resultado sea >= n
-  if(vertices>=3){
-    if((listagrado[0]+listagrado[2] )>= (vertice/2))
-      return 0; 
-    else  
-      return 1;
-    }      
-}
-
-function grado_uno(listagrado){
-    for(let i=0;i<listagrado.length;i++){
-      if(listagrado[i]===1)
-      return false;
-    }
-}
-function hamiltoniano(dirac,ore, conexo){    // si se cumple ore o dirac es hamiltoniano 
-  if (conexo=true && dirac=true ||conexo=true && ore=true){   // vertices tiene que tener grado mayor a 1
-    console.log("Si es Hamiltoniano");
-    return true;
-    }
-  else{
-    console.log("No es Hamiltoniano");
-    return false; }
-
-}
-
-      //FIN
-
-
-    
-
-    /
-
-
-
-    
-
     /*---------------------------------------------------------------------------------------------------
                                     Funciones para el item de flujo maximo
     -----------------------------------------------------------------------------------------------------
@@ -759,10 +672,58 @@ function hamiltoniano(dirac,ore, conexo){    // si se cumple ore o dirac es hami
                                     funciones para el item 4
     -----------------------------------------------------------------------------------------------------
      */
+     //// EULERIANO ////
+ function gradopar(listagrado){           //Debe ser conexo 
+  var par=0;                              // Todas las aristas de grado par
+  for(let i=0; i<listagrado.length;i++){
+    console.log(listagrado[i]%2)
+    if((listagrado[i]%2) === 0)
+
+      par++;
+    }
+  console.log("par",par)
+  console.log(listagrado.length)
+  if (par===listagrado.length)
+    return true;
+  else
+    return false;
+}
+ function grado(matriz){ ///mostrará los grados de cada arista
+  var listagrado = [], grado = 0;
+  for(let i=0; i<matriz.length;i++){
+    for(let j=0; j<matriz.length;j++){
+      grado += matriz[i][j];
+      console.log(grado)
+    } 
+    
+    listagrado.push(grado);
+    console.log(listagrado)
+    grado=0;
+  }
+  console.log(gradopar(listagrado))
+  if(gradopar(listagrado)===true)
+    return true
+  else
+    return false
+}
+  function euleriano(){ //grado = largo, conexo = true
+    var mAdyacencia = MatrizAdyacencia()
+    var matriz_c = MatrizCaminos(mAdyacencia, mCaminos);
+    console.log(mAdyacencia)
+    console.log(Conexo(mAdyacencia))
+    console.log(grado(mAdyacencia))
+    if( grado(matriz_c)=== true && Conexo(mAdyacencia) === false){
+      console.log("entro")
+      return true
+    }
+    else
+      return false
+
+  }
     function item_euleriano(){
       const boton = document.querySelector("#item3");
       const esEu = document.querySelector("#esEu");
-      var eu = euleriano(gradopar,Conexo);
+      var eu = euleriano();
       if(eu)
         esEu.textContent = "Es Euleriano";
       else
@@ -770,17 +731,16 @@ function hamiltoniano(dirac,ore, conexo){    // si se cumple ore o dirac es hami
       boton.disabled=true;
       
       //Hamiltoniano
-      
+      /*
       const esHam = document.querySelector("#esHam");
       var ham = hamiltoniano(dirac,ore,Conexo);
       if(ham)
         esHam.textContent = "Es Hamiltoniano";
       else
         esHam.textContent = "No es Hamiltoniano";
-
+    */
     }
-
-        /*---------------------------------------------------------------------------------------------------
+    /*---------------------------------------------------------------------------------------------------
                                     funciones para el item 5
     -----------------------------------------------------------------------------------------------------
      */
